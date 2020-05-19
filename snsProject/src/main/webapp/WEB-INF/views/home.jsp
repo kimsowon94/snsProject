@@ -6,13 +6,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet"
-	href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-<link rel='stylesheet'
-	href='https://fonts.googleapis.com/css?family=Open+Sans'>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+
+
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <script src="./resources/js/fnMain.js" charset="UTF-8"></script>
+<script src="./resources/js/main.js" charset="UTF-8"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script	src="./resources/compnent/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./resources/compnent/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- 카메라 아이콘, 엑스 아이콘 쓰기 위해.. -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <style>
 html, body, h1, h2, h3, h4, h5 {
 	font-family: "Open Sans", sans-serif
@@ -85,14 +93,17 @@ html, body, h1, h2, h3, h4, h5 {
 						<p>
 							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
 							<span id="position">Designer, UI</span>
+							<input type="hidden" id="" name="" class="input_info" placeholder="직업을 입력해주세요.">
 						</p>
 						<p>
 							<i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>
 							<span id="born">London, UK</span>
+							<input type="hidden" id="" name="" class="input_info" placeholder="출생지를 입력하세요.">
 						</p>
 						<p>
 							<i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>
 							<span id="birth">April 1, 1988</span>
+							<input type="hidden" id="" name="" class="input_info dateInput">
 						</p>
 						<input type="button" class="w3-button w3-theme"
 							onclick="fnProfile()" value="프로필 수정" style="float: right;">
@@ -362,31 +373,6 @@ html, body, h1, h2, h3, h4, h5 {
 				target="_blank">w3.css</a>
 		</p>
 	</footer>
-
-	<script>
-		// Accordion
-		function myFunction(id) {
-			var x = document.getElementById(id);
-			if (x.className.indexOf("w3-show") == -1) {
-				x.className += " w3-show";
-				x.previousElementSibling.className += " w3-theme-d1";
-			} else {
-				x.className = x.className.replace("w3-show", "");
-				x.previousElementSibling.className = x.previousElementSibling.className
-						.replace(" w3-theme-d1", "");
-			}
-		}
-
-		// Used to toggle the menu on smaller screens when clicking on the menu button
-		function openNav() {
-			var x = document.getElementById("navDemo");
-			if (x.className.indexOf("w3-show") == -1) {
-				x.className += " w3-show";
-			} else {
-				x.className = x.className.replace(" w3-show", "");
-			}
-		}
-	</script>
 
 </body>
 </html>

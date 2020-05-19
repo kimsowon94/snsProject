@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userInfoDAO">
+	<resultMap type="com.sns.project.vo.userInfoVO" id="userInfoVO">
+		<result property="userNum" column="USER_NUM"/>
+		<result property="userEmail" column="USER_EMAIL" />
+		<result property="userPw" column="USER_PW"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="userCareer" column="USER_CAREER"/>
+		<result property="userPhone" column="USER_PHONE"/>
+		<result property="userAddr1" column="USER_ADDR1"/>
+		<result property="userAddr2" column="USER_ADDR2"/>
+		<result property="createTime" column="CREATE_TIME"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+	</resultMap>
+	
+	<select id="userLogin" resultType="Integer">
+		SELECT COUNT(*)
+		FROM SNS_USERINFO
+		WHERE USER_EMAIL = #{userEmail}
+		    AND USER_PW = #{userPw}
+	</select>
+</mapper>
