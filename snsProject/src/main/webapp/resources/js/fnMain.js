@@ -22,26 +22,37 @@ function openNav() {
 }
 
 // 프로필 수정 클릭 시 
-function fnProfile() {
-	/*datePicker설정*/
-	$(".dateInput").datepicker({
-        showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-        ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
-        ,changeYear: true //콤보박스에서 년 선택 가능
-        ,changeMonth: true //콤보박스에서 월 선택 가능                              
-        ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
-        ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
-        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
-        ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
-        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
-      ,dateFormat: 'yy-mm-dd' //Input Display Format 변경
-	});
-	
+function pfUpdate() {
 	$("#position").css("display","none");
-	$("#born").css("display","none");
 	$("#birth").css("display","none");
 	$(".input_info").attr("type","text");
+	$("#imgLabel").css("display","inline-block");
+	$("#plusImg").css("cursor","pointer");
+	$("#fnProfile").css("display","none");
+	$("#fnProfileUpdate").css("display","block");
 	
+}
+
+function fnUpdate() {
+
+	var params = $(".main").serialize();
+
+	$.ajax({
+		url : "/userProfileUpdate.do",
+		dataType : "JSON",
+		type : "POST",
+		data : params,
+		success : function(data, textStatus, jqXHR) {
+			if(data.result == "success")
+			{
+				alert("프로필수정이 완료되었습니다.")
+				location.reload();
+			}
+		},
+		error : function() {
+			alert("오류");
+		}
+	})
 }
 
 function fnLogin() {
@@ -63,12 +74,14 @@ function fnLogin() {
 		}, 
 		success : function(data, textStatus, jqXHR) 
 		{
-			if(data == "fail"){
+			if(data.result == "fail"){
 				alert("아이디 또는 비밀번호가 틀렸습니다.");
+				location.href = '/home.do';
 			}
-			else  {
+			else  if(data.result == "success"){
 				location.href = '/mainSnsHome.do';
 			}
+
 		},
 		error : function() 
 		{
@@ -76,3 +89,89 @@ function fnLogin() {
 		}			
 	})
 }
+
+function telValidate(obj)
+{
+	 var number = obj.value.replace(/[^0-9]/g, '');
+	 var tel = '';
+	 
+	 if(number.length < 4) {
+        return number;
+    } else if(number.length < 7) {
+        tel += number.substr(0, 3);
+        tel += "-";
+        tel += number.substr(3);
+    } else if(number.length < 11) {
+        tel += number.substr(0, 3);
+        tel += "-";
+        tel += number.substr(3, 3);
+        tel += "-";
+        tel += number.substr(6);
+    } else {
+        tel += number.substr(0, 3);
+        tel += "-";
+        tel += number.substr(3, 4);
+        tel += "-";
+        tel += number.substr(7);
+    }
+	 
+	 obj.value = tel;
+	 
+	 return true;
+}
+function fnImg() {	
+	$("#fileCheck").val("Y");
+	 
+	var upload = document.querySelector('#imgFileReal');
+	//var preview = document.querySelector('#imgDiv');
+ 
+    upload.addEventListener('change',function (e) {
+    var get_file = e.target.files;
+ 
+    //var image = document.createElement('img');
+
+    var image = ' <img class="w3-circle" id="userPhoto" name="userPhoto" style="height: 106px; width: 106px" alt="Avatar" >'
+    			+'<i class="material-icons" id="imgDelete" style="position: relative; left:-1em; top:-1.3em; cursor:pointer" onclick="xImgFn()">&#xe14c;</i>';
+ 
+    /* FileReader 객체 생성 */
+        var reader = new FileReader();
+ 
+        /* reader 시작시 함수 구현 */    
+        reader.onload = (function (aImg) 
+        {
+            console.log(1);
+ 
+            return function (e) 
+            {
+                console.log(3);
+                /* base64 인코딩 된 스트링 데이터 */
+                $("#userPhoto").attr("src", e.target.result);              
+            }
+        })(image)
+ 
+        if(get_file)
+        {
+        	reader.readAsDataURL(get_file[0]);
+        	console.log(2);
+        }
+        
+        $("#plusImg").html(image);
+//      $("#plusImg").html(xImage);
+       
+        
+        $("#imgDelete").css("display", "block");
+    })
+
+}
+
+function xImgFn() {		
+	if(confirm("이미지를 삭제하시겠습니까?"))
+	{
+		var image = '<img src="./resources/img/default.jpg" name="userPhoto" class="w3-circle" style="height: 106px; width: 106px" alt="Avatar" >';
+		$("#plusImg").html(image);
+		
+		$("#fileCheck").val("Y");
+		$("#imgDelete").css("display", "none");
+	}
+}
+

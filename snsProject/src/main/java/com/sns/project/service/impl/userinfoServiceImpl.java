@@ -1,5 +1,8 @@
 package com.sns.project.service.impl;
 
+import java.util.List;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,17 @@ public class userinfoServiceImpl implements userinfoService {
 	public int userLogin(userInfoVO vo) throws Exception {
 		return userInfoDao.userLogin(vo);
 	}
+
+	@Override
+	public List<userInfoVO> userProfile(String userEmail) throws Exception {
+		return userInfoDao.userProfile(userEmail);
+	}
+
+	@Override
+	public int userProfileUpdate(userInfoVO vo) throws Exception {
+		return userInfoDao.userProfileUpdate(vo);
+	}
+
 	
 	
 }

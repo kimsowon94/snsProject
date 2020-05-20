@@ -1,5 +1,7 @@
 package com.sns.project.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class userInfoVO {
 	
 	private String userNum;
@@ -12,6 +14,24 @@ public class userInfoVO {
 	private String userAddr2;
 	private String createTime;
 	private String modifiedTime;
+	private String userPhoto;
+	private MultipartFile imgFileReal;
+	
+	
+	
+	public MultipartFile getImgFileReal() {
+		return imgFileReal;
+	}
+	public void setImgFileReal(MultipartFile imgFileReal) {
+		this.imgFileReal = imgFileReal;
+	}
+	
+	public String getUserPhoto() {
+		return userPhoto;
+	}
+	public void setUserPhoto(String userPhoto) {
+		this.userPhoto = userPhoto;
+	}
 	public String getUserNum() {
 		return userNum;
 	}

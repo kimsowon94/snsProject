@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <title>또웡 SNS</title>
@@ -25,9 +25,36 @@
 html, body, h1, h2, h3, h4, h5 {
 	font-family: "Open Sans", sans-serif
 }
+
+.filebox label{ 
+	display: inline-block; 
+	padding: .5em .75em; 
+	color: #999; 
+	font-size: inherit; 
+	line-height: normal; 
+	vertical-align: middle; 
+	cursor: pointer; 
+	border-bottom-color: #e2e2e2; 
+	border-radius: .25em; 
+} 
+.filebox input[type="file"] { 
+	/* 파일 필드 숨기기 */ 
+	position: absolute; 
+	width: 1px; 
+	height: 1px; 
+	padding: 0; 
+	margin: -1px; 
+	overflow: hidden; 
+	clip:rect(0,0,0,0); 
+	border: 0; 
+}
 </style>
 <body class="w3-theme-l5">
-
+<form class="main" enctype="multipart/form-data">
+	<!-- 세션값  -->
+	<input type="hidden" value="${sessionScope.userEmail }" id="userEmail" name="userEmail">
+	<input type="hidden" id="fileCheck" name="fileCheck" value="N">
+	
 	<!-- Navbar -->
 	<div class="w3-top">
 		<div class="w3-bar w3-theme-d2 w3-left-align w3-large">
@@ -84,29 +111,31 @@ html, body, h1, h2, h3, h4, h5 {
 				<!-- Profile -->
 				<div class="w3-card w3-round w3-white">
 					<div class="w3-container">
+					<c:forEach items="${list }" var="a">
 						<h4 class="w3-center">나의 프로필</h4>
-						<p class="w3-center">
-							<img src="./resources/img/1.png" class="w3-circle"
-								style="height: 106px; width: 106px" alt="Avatar">
-						</p>
-						<hr>
+							<p class="w3-center" id="plusImg">
+								<img src="./resources/img/default.jpg" class="w3-circle" style="height: 106px; width: 106px" alt="Avatar" >
+							</p>
+							<div class="filebox" style="align-items: center;">
+								<label for="imgFileReal" >
+								<i class="material-icons" id="imgLabel" style="display: none; position: absolute;left: 12em;top:9em;">add_a_photo</i></label>
+								<input type="file" id="imgFileReal" name="imgFileReal"	onclick="fnImg()" style="display: inline-block;">
+								<!-- <input type="button" value="삭제" id="imgDelete" style="display: none; width: 40px;">	 -->
+							</div>
+							<hr>
 						<p>
 							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<span id="position">Designer, UI</span>
-							<input type="hidden" id="" name="" class="input_info" placeholder="직업을 입력해주세요.">
+							<span id="position">${a.userCareer }</span>
+							<input type="hidden" id="userCareer" name="userCareer" class="input_info" value="${a.userCareer }">
 						</p>
 						<p>
-							<i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>
-							<span id="born">London, UK</span>
-							<input type="hidden" id="" name="" class="input_info" placeholder="출생지를 입력하세요.">
+							<i class="fa fa-mobile fa-fw w3-margin-right w3-text-theme"></i>
+							<span id="birth">${a.userPhone }</span>
+							<input type="hidden" id="userPhone" name="userPhone" class="input_info" onkeyup="telValidate(this)" maxlength=13 value="${a.userPhone }">
 						</p>
-						<p>
-							<i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>
-							<span id="birth">April 1, 1988</span>
-							<input type="hidden" id="" name="" class="input_info dateInput">
-						</p>
-						<input type="button" class="w3-button w3-theme"
-							onclick="fnProfile()" value="프로필 수정" style="float: right;">
+						<input type="button" class="w3-button w3-theme" id="fnProfile"	onclick="pfUpdate()" value="프로필 수정" style="float: right;">
+						<input type="button" class="w3-button w3-theme" id="fnProfileUpdate" onclick="fnUpdate()" value="확인" style="float: right; display: none;">
+						</c:forEach>
 					</div>
 				</div>
 				<br>
@@ -373,6 +402,6 @@ html, body, h1, h2, h3, h4, h5 {
 				target="_blank">w3.css</a>
 		</p>
 	</footer>
-
+</form>
 </body>
 </html>

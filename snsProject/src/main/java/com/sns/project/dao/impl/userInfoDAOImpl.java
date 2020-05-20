@@ -1,5 +1,8 @@
 package com.sns.project.dao.impl;
 
+import java.util.List;
+
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,5 +22,16 @@ public class userInfoDAOImpl implements userInfoDAO{
 	public int userLogin(userInfoVO vo) throws Exception {
 		return sqlsession.selectOne("userInfoDAO.userLogin", vo);
 	}
+
+	@Override
+	public List<userInfoVO> userProfile(String userEmail) throws Exception {
+		return sqlsession.selectList("userInfoDAO.userProfile", userEmail);
+	}
+
+	@Override
+	public int userProfileUpdate(userInfoVO vo) throws Exception {
+		return sqlsession.update("userInfoDAO.userProfileUpdate", vo);
+	}
+
 
 }

@@ -12,6 +12,7 @@
 		<result property="userAddr2" column="USER_ADDR2"/>
 		<result property="createTime" column="CREATE_TIME"/>
 		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="userPhoto" column="USER_PHOTO"/>
 	</resultMap>
 	
 	<select id="userLogin" resultType="Integer">
@@ -20,4 +21,18 @@
 		WHERE USER_EMAIL = #{userEmail}
 		    AND USER_PW = #{userPw}
 	</select>
+	
+	<select id="userProfile" resultMap="userInfoVO">
+		SELECT USER_NAME, USER_CAREER, USER_PHONE, USER_EMAIL
+		FROM SNS_USERINFO
+		WHERE USER_EMAIL = #{userEmail}
+	</select>
+	
+	<update id="userProfileUpdate">
+		UPDATE SNS_USERINFO
+		SET  USER_CAREER = #{userCarrer}
+   			,USER_PHONE = #{userPhone}
+   			,USER_PHOTO = #{userPhoto}
+		WHERE USER_EMAIL = #{userEmail}
+	</update>
 </mapper>
