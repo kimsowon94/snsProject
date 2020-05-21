@@ -34,7 +34,7 @@ public class userInfoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value="/userLogin.do", method = RequestMethod.POST)
+	@RequestMapping(value="/userLogin.do", method = {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public HashMap<String, String> userLogin(userInfoVO vo, HttpSession session) throws Exception
 	{
@@ -70,7 +70,7 @@ public class userInfoController {
 	}
 	
 	// 프로필 수정
-	@RequestMapping(value="/userProfileUpdate.do", method = RequestMethod.POST)
+	@RequestMapping(value="/userProfileUpdate.do", method = RequestMethod.POST,consumes ={"multipart/form-data"})
 	@ResponseBody
 	public HashMap<String, String> userProfileUpdate(userInfoVO vo, @RequestParam("fileCheck")String fileCheck
 			, HttpServletRequest request ) throws Exception
@@ -95,6 +95,21 @@ public class userInfoController {
 		return result;	
 	}
 	
+	// 로그아웃
+	@RequestMapping(value="/userLogout.do",method = RequestMethod.GET)
+	public String userLogout(HttpSession session)
+	{
+		String id = (String) session.getAttribute("userEmail");
+
+		session.removeAttribute(id);
+
+		session.invalidate();
+
+		System.out.println("session에 아이디값 남아있니? :" + id);
+
+		return "login";
+		
+	}
 	
 	
 	
@@ -103,7 +118,8 @@ public class userInfoController {
 	
 	
 	
-	
+	// 파일 업로드
+	//--------------------------------------------------------------------------------------
 	private String fileUpload(MultipartFile multipartFile, String savePath ) {
 		String 	fileName = null;
 		String 	originFilename 	= multipartFile.getOriginalFilename();
@@ -153,5 +169,5 @@ public class userInfoController {
 		return result;
 		
 	}
-	
+	// --------------------------------------------------------------------------------------
 }

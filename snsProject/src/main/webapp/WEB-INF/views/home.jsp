@@ -58,35 +58,42 @@ html, body, h1, h2, h3, h4, h5 {
 	<!-- Navbar -->
 	<div class="w3-top">
 		<div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-			<a
-				class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
-				href="javascript:void(0);" onclick="openNav()"><i
-				class="fa fa-bars"></i></a> <a href="#"
-				class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i
-				class="fa fa-home w3-margin-right"></i>Logo</a> <a href="#"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="News"><i class="fa fa-globe"></i></a> <a href="#"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="Account Settings"><i class="fa fa-user"></i></a> <a href="#"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="Messages"><i class="fa fa-envelope"></i></a>
+			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"	href="javascript:void(0);" onclick="openNav()">
+				<i class="fa fa-bars"></i>
+			</a> 
+			<a href="#"	class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+				<i class="fa fa-home w3-margin-right"></i>Logo
+			</a> 
+			<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"	title="News">
+				<i class="fa fa-globe"></i>
+			</a> 
+			<a href="#"	class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"	title="Account Settings"> 
+				<i class="fa fa-user"></i>
+			</a> 
+			<a href="#"	class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"	title="Messages">
+				<i class="fa fa-envelope"></i>
+			</a>
 			<div class="w3-dropdown-hover w3-hide-small">
 				<button class="w3-button w3-padding-large" title="Notifications">
-					<i class="fa fa-bell"></i><span
-						class="w3-badge w3-right w3-small w3-green">3</span>
+					<i class="fa fa-bell"></i>
+					<span class="w3-badge w3-right w3-small w3-green">3</span>
 				</button>
-				<div class="w3-dropdown-content w3-card-4 w3-bar-block"
-					style="width: 300px">
-					<a href="#" class="w3-bar-item w3-button">One new friend
-						request</a> <a href="#" class="w3-bar-item w3-button">John Doe
-						posted on your wall</a> <a href="#" class="w3-bar-item w3-button">Jane
-						likes your post</a>
+				<div class="w3-dropdown-content w3-card-4 w3-bar-block"	style="width: 300px">
+					<a href="#" class="w3-bar-item w3-button">One new friend request</a> 
+					<a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a> 
+					<a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
 				</div>
 			</div>
-			<a href="#"
-				class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
-				title="My Account"> <img src="/w3images/avatar2.png"
-				class="w3-circle" style="height: 23px; width: 23px" alt="Avatar">
+			<a href="#"	class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account"> 
+			<!-- <img src="/w3images/avatar2.png" class="w3-circle" style="height: 23px; width: 23px" alt="Avatar"> -->
+			<c:forEach items="${list }" var="a">
+				<c:if test="${a.userPhoto != null }">
+				<img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px" onclick="if(confirm('로그아웃하시겠습니까?')){location.href='userLogout.do';}">
+				</c:if>
+				<c:if test="${a.userPhoto == null }">
+				<img src="../resources/img/default.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px" onclick="if(confirm('로그아웃하시겠습니까?')){location.href='userLogout.do';}">
+				</c:if>
+			</c:forEach>
 			</a>
 		</div>
 	</div>
@@ -114,11 +121,18 @@ html, body, h1, h2, h3, h4, h5 {
 					<c:forEach items="${list }" var="a">
 						<h4 class="w3-center">나의 프로필</h4>
 							<p class="w3-center" id="plusImg">
+								<c:if test="${a.userPhoto != null}">
+								<img src="../resources/upload/${a.userPhoto }" class="w3-circle" style="height: 106px; width: 106px" alt="Avatar" id="photo">
+								<i class="material-icons" id="imgDelete" style="cursor:pointer; text-align: -webkit-match-parent; display: none;"  onclick="xImgFn()">&#xe14c;</i>
+								</c:if>
+								<i class="material-icons" id="imgDelete" style="position: relative; display:none; left:-1em; top:-1.3em; cursor:pointer" onclick="xImgFn()">&#xe14c;</i>
+								<c:if test="${a.userPhoto == null or a.userPhoto == ''}">
 								<img src="./resources/img/default.jpg" class="w3-circle" style="height: 106px; width: 106px" alt="Avatar" >
+								</c:if>
 							</p>
 							<div class="filebox" style="align-items: center;">
 								<label for="imgFileReal" >
-								<i class="material-icons" id="imgLabel" style="display: none; position: absolute;left: 12em;top:9em;">add_a_photo</i></label>
+								<i class="material-icons" id="imgLabel" style="display: none; position: absolute;">add_a_photo</i></label>
 								<input type="file" id="imgFileReal" name="imgFileReal"	onclick="fnImg()" style="display: inline-block;">
 								<!-- <input type="button" value="삭제" id="imgDelete" style="display: none; width: 40px;">	 -->
 							</div>
@@ -240,7 +254,7 @@ html, body, h1, h2, h3, h4, h5 {
 					<div class="w3-col m12">
 						<div class="w3-card w3-round w3-white">
 							<div class="w3-container w3-padding">
-								<h6 class="w3-opacity">Social Media template by w3.css</h6>
+								<h6 class="w3-opacity">오늘 하루를 남겨볼까요~?</h6>
 								<p contenteditable="true" class="w3-border w3-padding">Status:
 									Feeling Blue</p>
 								<button type="button" class="w3-button w3-theme">
@@ -252,8 +266,8 @@ html, body, h1, h2, h3, h4, h5 {
 				</div>
 
 				<div class="w3-container w3-card w3-white w3-round w3-margin">
-					<br> <img src="/w3images/avatar2.png" alt="Avatar"
-						class="w3-left w3-circle w3-margin-right" style="width: 60px">
+					<br> 
+					<img src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 60px">
 					<span class="w3-right w3-opacity">1 min</span>
 					<h4>John Doe</h4>
 					<br>

@@ -30,18 +30,28 @@ function pfUpdate() {
 	$("#plusImg").css("cursor","pointer");
 	$("#fnProfile").css("display","none");
 	$("#fnProfileUpdate").css("display","block");
+	if($("#photo").attr("src") != null)
+	{
+		$("#imgDelete").css("display","block");
+	}
+	
 	
 }
 
 function fnUpdate() {
-
-	var params = $(".main").serialize();
-
+	
+	var form = $(".main")[0];
+	var formData = new FormData(form);
+	
 	$.ajax({
 		url : "/userProfileUpdate.do",
+		processData: false,
+        contentType: false,
+        async:false,
+        cache:false,
 		dataType : "JSON",
 		type : "POST",
-		data : params,
+		data : formData,
 		success : function(data, textStatus, jqXHR) {
 			if(data.result == "success")
 			{
@@ -131,7 +141,8 @@ function fnImg() {
     //var image = document.createElement('img');
 
     var image = ' <img class="w3-circle" id="userPhoto" name="userPhoto" style="height: 106px; width: 106px" alt="Avatar" >'
-    			+'<i class="material-icons" id="imgDelete" style="position: relative; left:-1em; top:-1.3em; cursor:pointer" onclick="xImgFn()">&#xe14c;</i>';
+    			+'<i class="material-icons" id="imgDelete" style="cursor:pointer; text-align: -webkit-match-parent;"  onclick="xImgFn()">&#xe14c;</i>';
+    			
  
     /* FileReader 객체 생성 */
         var reader = new FileReader();
@@ -164,14 +175,16 @@ function fnImg() {
 
 }
 
+// 프로필 이미지 삭제
 function xImgFn() {		
 	if(confirm("이미지를 삭제하시겠습니까?"))
 	{
-		var image = '<img src="./resources/img/default.jpg" name="userPhoto" class="w3-circle" style="height: 106px; width: 106px" alt="Avatar" >';
+		var image = '<img src="../resources/img/default.jpg" class="w3-circle" style="height: 106px; width: 106px" alt="Avatar" >';
 		$("#plusImg").html(image);
-		
+		$("#imgFileReal").attr("src","");
 		$("#fileCheck").val("Y");
 		$("#imgDelete").css("display", "none");
 	}
 }
+
 

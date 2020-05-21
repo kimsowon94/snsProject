@@ -23,16 +23,19 @@
 	</select>
 	
 	<select id="userProfile" resultMap="userInfoVO">
-		SELECT USER_NAME, USER_CAREER, USER_PHONE, USER_EMAIL
+		SELECT USER_NAME, USER_CAREER, USER_PHONE, USER_EMAIL, USER_PHOTO
 		FROM SNS_USERINFO
 		WHERE USER_EMAIL = #{userEmail}
 	</select>
 	
 	<update id="userProfileUpdate">
 		UPDATE SNS_USERINFO
-		SET  USER_CAREER = #{userCarrer}
+		SET  USER_CAREER = #{userCareer}
    			,USER_PHONE = #{userPhone}
+   			<if test="userPhoto != null">
    			,USER_PHOTO = #{userPhoto}
+   			</if>
+   			,MODIFIED_TIME = SYSDATE
 		WHERE USER_EMAIL = #{userEmail}
 	</update>
 </mapper>
