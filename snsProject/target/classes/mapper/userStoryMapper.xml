@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userStoryDAO">
+	<resultMap type="com.sns.project.vo.userStoryVO" id="userStoryVO">
+		<result property="storyNum" column="STORY_NUM"/>
+		<result property="storyContent" column="STORY_CONTENT"/>
+		<result property="storyDate" column="STORY_DATE"/>
+		<result property="storyPhoto" column="STORY_PHOTO"/>
+		<result property="userEmail" column="USER_EMAIL"/>
+		<result property="userNum" column="USER_NUM"/>
+		<result property="userEmail" column="USER_EMAIL" />
+		<result property="userPw" column="USER_PW"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="userCareer" column="USER_CAREER"/>
+		<result property="userPhone" column="USER_PHONE"/>
+		<result property="userAddr1" column="USER_ADDR1"/>
+		<result property="userAddr2" column="USER_ADDR2"/>
+		<result property="createTime" column="CREATE_TIME"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="userPhoto" column="USER_PHOTO"/>
+	</resultMap>
+	
+	<insert id="userStoryInsert">
+	<selectKey keyProperty="storyNum" resultType="String" order="BEFORE">
+		SELECT NVL(MAX(STORY_NUM),0)+1 AS "STORY_NUM" FROM SNS_STORY
+	</selectKey>
+		INSERT INTO SNS_STORY(STORY_NUM, STORY_CONTENT, STORY_DATE, STORY_PHOTO, USER_EMAIL)
+		VALUES
+			(
+				#{storyNum}
+			   ,#{storyContent}
+			   ,SYSDATE
+			   <if test="storyPhoto != null">
+			   ,#{storyPhoto}
+			   </if>
+			   <if test="storyPhoto == null">
+			   ,null
+			   </if>
+			   ,#{userEmail}
+			 )
+	</insert>
+	
+	<select id="userPostList" resultMap="userStoryVO"> 
+		SELECT A.USER_NUM "USER_NUM", A.USER_EMAIL "USER_EMAIL", A.USER_NAME "USER_NAME"
+			  ,A.USER_CAREER "USER_CAREER", A.USER_PHOTO "USER_PHOTO"
+			  ,B.STORY_NUM "STORY_NUM", B.STORY_CONTENT "STORY_CONTENT"
+			  ,B.STORY_DATE "STORY_DATE"
+			  ,B.STORY_PHOTO "STORY_PHOTO"
+		FROM SNS_USERINFO A, SNS_STORY B
+		WHERE A.USER_EMAIL = B.USER_EMAIL(+)
+			AND B.USER_EMAIL = #{userEmail}
+		ORDER BY STORY_NUM DESC
+	</select>
+</mapper>

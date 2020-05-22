@@ -5,6 +5,7 @@ package com.sns.project.controller;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,14 +24,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sns.project.HomeController;
+import com.sns.project.service.userStoryService;
 import com.sns.project.service.userinfoService;
 import com.sns.project.vo.userInfoVO;
+import com.sns.project.vo.userStoryVO;
 
 
 @Controller
 public class userInfoController {
 	@Autowired
 	userinfoService service;
+	
+	@Autowired
+	userStoryService storyService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -59,14 +65,45 @@ public class userInfoController {
 	
 	/* sns메인 홈화면 이동 및 프로필에 데이터 뿌리기 */
 	@RequestMapping(value="/mainSnsHome.do", method = RequestMethod.GET)
-	public String mainSnsHome(Model model,HttpSession session) throws Exception
+	public String mainSnsHome(Model model,HttpSession session,userStoryVO storyVo,Date date) throws Exception
 	{
 		String userEmail = (String) session.getAttribute("userEmail");
 		List<userInfoVO> list = service.userProfile(userEmail);
+		List<userStoryVO> storyList = storyService.userPostList(userEmail);
 		
+		
+		model.addAttribute("storyList", storyList);
 		model.addAttribute("list", list);
 		
 		return "home";	
+	}
+	
+	@RequestMapping(value="/userPost.do", method = RequestMethod.POST,consumes ={"multipart/form-data"})
+	@ResponseBody
+	public HashMap<String, String> userStoryInsert(userStoryVO storyVo
+			,@RequestParam("storyfileCheck")String storyfileCheck, HttpServletRequest request) throws Exception
+	{
+		HashMap<String, String> result = new HashMap<String, String>();
+		String savePath = request.getRealPath("/resources/storyImg");
+		if(storyfileCheck.equals("Y"))
+		{
+			String story_file = fileUpload(storyVo.getStoryPhotoReal(), savePath);
+			storyVo.setStoryPhoto(story_file);
+		}
+		
+		int count = storyService.userStoryInsert(storyVo);
+		
+		if(count == 1)
+		{
+			System.out.println("post 성공");
+			result.put("result", "success");
+		}
+		else
+		{
+			System.out.println("post 실패");
+			result.put("result", "fail");
+		}
+		return result;	
 	}
 	
 	// 프로필 수정
@@ -170,4 +207,6 @@ public class userInfoController {
 		
 	}
 	// --------------------------------------------------------------------------------------
+	
+
 }

@@ -187,4 +187,101 @@ function xImgFn() {
 	}
 }
 
+// post하기
+function fnPost() {
+	var form = $(".main")[0];
+	var formData = new FormData(form);
+	
+/*	var storyContent = $(".storyContent").html();	 
+	var userEmail = $("#userEmail").val();*/
+	
+	
+	formData.append("storyContent", $(".storyContent").html());
+	
+	$.ajax({
+		url : "/userPost.do",
+		processData: false,
+        contentType: false,
+        async:false,
+        cache:false,
+		dataType : "JSON",
+		type : "POST",
+		data : /*{ 
+			"storyContent" : storyContent,
+			"userEmail" : userEmail,
+		},*/ formData,
+		success : function(data, textStatus, jqXHR) 
+		{
+			if(data.result == "success")
+			{
+				alert("게시글이 등록되었습니다.");
+				location.reload();
+			}else{
+				alert("게시글 오류");			
+			}
+		},
+		error : function() 
+		{
+			alert("오류");
+		}			
+	})
+}
+
+function fnStoryImg() {
+	$("#storyfileCheck").val("Y");
+	 
+	var upload = document.querySelector('#storyPhotoReal');
+	//var preview = document.querySelector('#imgDiv');
+ 
+    upload.addEventListener('change',function (e) {
+    var get_file = e.target.files;
+ 
+    //var image = document.createElement('img');
+ 
+    
+    var image = '<img id="storyPhoto" name ="storyPhoto" style="width: 20%" class="w3-margin-bottom">'
+    			+'<i class="material-icons" id="imgStroyDelete" style="cursor:pointer; text-align: -webkit-match-parent;" onclick="StoryImgDel()">&#xe14c;</i>';
+    			
+ 
+    /* FileReader 객체 생성 */
+        var reader = new FileReader();
+ 
+        /* reader 시작시 함수 구현 */    
+        reader.onload = (function (aImg) 
+        {
+            console.log(1);
+ 
+            return function (e) 
+            {
+                console.log(3);
+                /* base64 인코딩 된 스트링 데이터 */
+                $("#storyPhoto").attr("src", e.target.result);              
+            }
+        })(image)
+ 
+        if(get_file)
+        {
+        	reader.readAsDataURL(get_file[0]);
+        	console.log(2);
+        }
+        
+        $("#storyImg").html(image);
+//      $("#plusImg").html(xImage);
+       
+        
+        $("#imgStroyDelete").css("display", "block");
+    })
+
+}
+
+function StoryImgDel() {
+	if(confirm("이미지를 삭제하시겠습니까?"))
+	{
+		$("#storyImg").children().remove();
+		$("#storyPhotoReal").attr("src","");
+		$("#storyfileCheck").val("N");
+		$("#imgStroyDelete").css("display", "none");
+	}
+}
+
 

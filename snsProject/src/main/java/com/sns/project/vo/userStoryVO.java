@@ -2,10 +2,56 @@ package com.sns.project.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class userInfoVO {
+public class userStoryVO {
 	
-	private String userNum;
+	private String storyNum;
+	private String storyContent;
+	private String storyDate;
+	private String storyPhoto;
 	private String userEmail;
+	private MultipartFile storyPhotoReal;
+	
+	
+	
+	
+	
+	public MultipartFile getStoryPhotoReal() {
+		return storyPhotoReal;
+	}
+	public void setStoryPhotoReal(MultipartFile storyPhotoReal) {
+		this.storyPhotoReal = storyPhotoReal;
+	}
+	public String getStoryNum() {
+		return storyNum;
+	}
+	public void setStoryNum(String storyNum) {
+		this.storyNum = storyNum;
+	}
+	public String getStoryContent() {
+		return storyContent;
+	}
+	public void setStoryContent(String storyContent) {
+		this.storyContent = storyContent;
+	}
+	public String getStoryDate() {
+		return storyDate;
+	}
+	public void setStoryDate(String storyDate) {
+		this.storyDate = storyDate;
+	}
+	public String getStoryPhoto() {
+		return storyPhoto;
+	}
+	public void setStoryPhoto(String storyPhoto) {
+		this.storyPhoto = storyPhoto;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	private String userNum;
 	private String userPw;
 	private String userName;
 	private String userCareer;
@@ -38,12 +84,7 @@ public class userInfoVO {
 	public void setUserNum(String userNum) {
 		this.userNum = userNum;
 	}
-	public String getUserEmail() {
-		return userEmail;
-	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
+
 	public String getUserPw() {
 		return userPw;
 	}
@@ -93,5 +134,6 @@ public class userInfoVO {
 		this.modifiedTime = modifiedTime;
 	}
 	
-
+	
+	
 }
