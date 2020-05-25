@@ -26,7 +26,7 @@ html, body, h1, h2, h3, h4, h5 {
 	font-family: "Open Sans", sans-serif
 }
 
-.filebox label{ 
+.filebox label, .filebox2 label{ 
 	display: inline-block; 
 	padding: .5em .75em; 
 	color: #999; 
@@ -37,7 +37,7 @@ html, body, h1, h2, h3, h4, h5 {
 	border-bottom-color: #e2e2e2; 
 	border-radius: .25em; 
 } 
-.filebox input[type="file"] { 
+.filebox input[type="file"] ,.filebox2 input[type="file"] { 
 	/* 파일 필드 숨기기 */ 
 	position: absolute; 
 	width: 1px; 
@@ -297,11 +297,15 @@ html, body, h1, h2, h3, h4, h5 {
 					</div>
 					<button type="button"
 						class="w3-button w3-theme-d1 w3-margin-bottom">
-						<i class="fa fa-thumbs-up"></i>  Like
+						<i class="fa fa-thumbs-up"></i>  좋아요
 					</button>
 					<button type="button"
 						class="w3-button w3-theme-d2 w3-margin-bottom">
-						<i class="fa fa-comment"></i>  Comment
+						<i class="fa fa-comment"></i> 댓글
+					</button>
+					<!-- 게시글 삭제하기 -->
+					<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="if(confirm('해당 게시글을 삭제하시겠습니까?')){fnDelStory(${a.storyNum});}">
+						<i class="fa fa-trash-o"></i>  삭제
 					</button>
 				</div>
 				</c:forEach>

@@ -148,6 +148,28 @@ public class userInfoController {
 		
 	}
 	
+	//story 삭제
+	@RequestMapping(value="/delUserStory.do", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, String> delUserStory(userStoryVO storyVo) throws Exception
+	{
+		HashMap<String, String> result = new HashMap<String, String>();
+		
+		int num = storyService.delUserStory(storyVo);
+		if(num == 1)
+		{
+			System.out.println("post 삭제 성공");
+			result.put("result", "success");
+		}
+		else
+		{
+			System.out.println("post 삭제 실패");
+			result.put("result", "fail");
+		}
+		return result;
+		
+	}
+	
 	
 	
 	

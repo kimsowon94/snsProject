@@ -206,10 +206,7 @@ function fnPost() {
         cache:false,
 		dataType : "JSON",
 		type : "POST",
-		data : /*{ 
-			"storyContent" : storyContent,
-			"userEmail" : userEmail,
-		},*/ formData,
+		data : formData,
 		success : function(data, textStatus, jqXHR) 
 		{
 			if(data.result == "success")
@@ -228,9 +225,11 @@ function fnPost() {
 }
 
 function fnStoryImg() {
+	
 	$("#storyfileCheck").val("Y");
 	 
 	var upload = document.querySelector('#storyPhotoReal');
+	
 	//var preview = document.querySelector('#imgDiv');
  
     upload.addEventListener('change',function (e) {
@@ -266,9 +265,6 @@ function fnStoryImg() {
         }
         
         $("#storyImg").html(image);
-//      $("#plusImg").html(xImage);
-       
-        
         $("#imgStroyDelete").css("display", "block");
     })
 
@@ -283,5 +279,40 @@ function StoryImgDel() {
 		$("#imgStroyDelete").css("display", "none");
 	}
 }
+
+
+//게시글 삭제 
+function fnDelStory(num) {
+	var storyNum = num;
+	var userEmail = $("#userEmail").val();
+	
+	$.ajax({
+		url : "/delUserStory.do",
+		dataType : "JSON",
+		type : "POST",
+		data : {
+			"userEmail" : userEmail,
+			"storyNum" : storyNum,
+		}, 
+		success : function(data, textStatus, jqXHR) 
+		{
+			if(data.result == "success")
+			{
+				alert("게시글이 삭제 되었습니다.")
+				location.reload();
+			}else{
+				alert("다시 시도하세요.");
+				location.reload();
+			}
+
+		},
+		error : function() 
+		{
+			alert("오류");
+		}			
+	})
+
+}
+
 
 

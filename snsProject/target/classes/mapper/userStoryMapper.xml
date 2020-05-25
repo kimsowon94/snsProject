@@ -51,4 +51,10 @@
 			AND B.USER_EMAIL = #{userEmail}
 		ORDER BY STORY_NUM DESC
 	</select>
+	
+	<delete id="delUserStory">
+		DELETE SNS_STORY
+		WHERE STORY_NUM = #{storyNum}
+		    AND USER_EMAIL = #{userEmail}
+	</delete>
 </mapper>

@@ -24,5 +24,10 @@ public class userStoryServiceImpl implements userStoryService {
 	public List<userStoryVO> userPostList(String userEmail) throws Exception {
 		return storyDao.userPostList(userEmail);
 	}
+
+	@Override
+	public int delUserStory(userStoryVO storyVo) throws Exception {
+		return storyDao.delUserStory(storyVo);
+	}
 	
 }

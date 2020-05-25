@@ -25,4 +25,9 @@ public class userStoryDAOImpl implements userStoryDAO{
 		return sqlsession.selectList("userStoryDAO.userPostList", userEmail);
 	}
 
+	@Override
+	public int delUserStory(userStoryVO storyVo) throws Exception {
+		return sqlsession.delete("userStoryDAO.delUserStory", storyVo);
+	}
+
 }
