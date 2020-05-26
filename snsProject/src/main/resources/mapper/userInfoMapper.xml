@@ -39,5 +39,28 @@
 		WHERE USER_EMAIL = #{userEmail}
 	</update>
 	
+	<select id="userEmailCheck" resultType="Integer">
+		SELECT COUNT(*)
+		FROM SNS_USERINFO
+		WHERE USER_EMAIL = #{userEmail}
+	</select>
+	
+	<insert id="userRegister">
+		<selectKey keyProperty="userNum" order="BEFORE" resultType="String">
+			SELECT NVL(MAX(USER_NUM),0)+1 AS "USER_NUM" FROM SNS_USERINFO
+		</selectKey>
+			INSERT INTO SNS_USERINFO(USER_NUM, USER_EMAIL, USER_PW, USER_NAME, USER_CAREER, USER_PHONE,CREATE_TIME, MODIFIED_TIME,USER_PHOTO) 
+			VALUES (
+					 #{userNum}
+				    ,#{userEmail}
+				    ,#{userPw}
+				    ,#{userName}
+				    ,#{userCareer}
+				    ,#{userPhone}
+				    ,sysdate
+				    ,null
+				    ,null
+				   )
+	</insert>
 	
 </mapper>

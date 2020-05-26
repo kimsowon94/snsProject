@@ -7,7 +7,8 @@
 <title>로그인</title>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script src="./resources/js/fnMain.js" charset="UTF-8"></script>
 <script src="./resources/js/main.js" charset="UTF-8"></script>
@@ -209,13 +210,13 @@ a{
 		<div class="register-info-box">
 			<h2>Don't have an account?</h2>
 			<p>Lorem ipsum dolor sit amet</p>
-			<label id="label-login" for="log-login-show">Register</label> 
+			<label id="label-login" for="log-login-show" onclick="location.href='registerUser.do'">Register</label> 
 			<input type="radio" name="active-log-panel" id="log-login-show">
 		</div>
 
 		<div class="white-panel">
 			<div class="login-show">
-				<h2>LOGIN</h2>
+				<h2>LOGIN</h2>                      
 				<input type="text" placeholder="Email" name="userEmail" id="userEmail"> 
 				<input type="password" placeholder="Password" name="userPw" id="userPw"> 
 				<input type="button" value="Login" onclick="fnLogin()"> 

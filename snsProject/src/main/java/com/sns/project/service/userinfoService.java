@@ -14,4 +14,10 @@ public interface userinfoService {
 	
 	// 유저 프로필 update
 	public int userProfileUpdate(userInfoVO vo)throws Exception;
+	
+	// 회원가입 이메일 중복 확인
+	public int userEmailCheck(String userEmail)throws Exception;
+	
+	// 회원가입
+	public int userRegister(userInfoVO vo)throws Exception;
 }

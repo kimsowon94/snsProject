@@ -33,5 +33,15 @@ public class userInfoDAOImpl implements userInfoDAO{
 		return sqlsession.update("userInfoDAO.userProfileUpdate", vo);
 	}
 
+	@Override
+	public int userEmailCheck(String userEmail) throws Exception {
+		return sqlsession.selectOne("userInfoDAO.userEmailCheck", userEmail);
+	}
+
+	@Override
+	public int userRegister(userInfoVO vo) throws Exception {
+		return sqlsession.insert("userInfoDAO.userRegister", vo);
+	}
+
 
 }

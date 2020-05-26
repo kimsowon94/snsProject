@@ -314,5 +314,80 @@ function fnDelStory(num) {
 
 }
 
+// 회원가입 
+function fnUserRegister() {
+	var check = fnValueCheck();
+	var formData = $("#registerForm").serialize();
+	
+	
+	if (check == true)
+	{
+		$.ajax({
+			url : "/userRegister.do",
+			dataType : "JSON",
+			type : "POST",
+			data : formData,
+			success : function(data, textStatus, jqXHR) 
+			{
+				if(data.result == "1")
+				{
+					alert("회원가입이 완료되었습니다.");
+					location.href="/home.do";
+				}else{
+					alert("다시 시도하세요.");
+					location.reload();
+				}
+
+			},
+			error : function() 
+			{
+				alert("오류");
+			}			
+		})
+	}
+}
+
+
+// 회원가입 빈칸 검사 
+function fnValueCheck() {
+	if($("#userEmailRe").val() == "")
+	{
+		alert('이메일을 입력하세요.');
+		$("#userEmailRe").focus();
+		return false;
+	}
+	if($("#userPwRe").val() == "")
+	{
+		alert('비밀번호를 입력하세요.');
+		$("#userPwRe").focus();
+		return false;
+	}
+	if($("#userPw2").val() == "")
+	{
+		alert('비밀번호를 재확인해주세요.');
+		$("#userPw2").focus();
+		return false;
+	}
+	if($("#userCareerRe").val() == "")
+	{
+		alert('직업을 입력하세요.');
+		$("#userCareerRe").focus();
+		return false;
+	}
+	if($("#userPhoneRe").val() == "")
+	{
+		alert('핸드폰번호를 입력하세요.');
+		$("#userPhoneRe").focus();
+		return false;
+	}
+	if($("#userNameRe").val() == "")
+	{
+		alert('닉네임을 입력하세요.');
+		$("#userNameRe").focus();
+		return false;
+	}
+	
+	return true;
+}
 
 

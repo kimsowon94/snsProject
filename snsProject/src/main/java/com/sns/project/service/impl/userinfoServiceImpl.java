@@ -31,6 +31,16 @@ public class userinfoServiceImpl implements userinfoService {
 		return userInfoDao.userProfileUpdate(vo);
 	}
 
+	@Override
+	public int userEmailCheck(String userEmail) throws Exception {
+		return userInfoDao.userEmailCheck(userEmail);
+	}
+
+	@Override
+	public int userRegister(userInfoVO vo) throws Exception {
+		return userInfoDao.userRegister(vo);
+	}
+
 	
 	
 }

@@ -170,6 +170,53 @@ public class userInfoController {
 		
 	}
 	
+	// 회원가입 창 이동
+	@RequestMapping(value="/registerUser.do", method = RequestMethod.GET)
+	public String registerUser()
+	{
+		return "signUp";
+	}
+	
+	// 회원가입 이메일 중복 확인
+	@RequestMapping(value="/userEmailCheck.do", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, String> userEmailCheck(String userEmail) throws Exception
+	{
+		HashMap<String, String> result = new HashMap<String, String>();
+		int count = service.userEmailCheck(userEmail);
+		
+		if(count == 1)
+		{
+			System.out.println("중복 이메일");
+			result.put("result", "1");		
+		}
+		else {
+			System.out.println("중복 이메일");
+			result.put("result", "0");	
+		}
+		return result;
+	}
+	
+	// 유저 회원가입
+	@RequestMapping(value="/userRegister.do", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, String> userRegister(userInfoVO vo) throws Exception
+	{
+		HashMap<String, String> result = new HashMap<String, String>();
+		
+		int count = service.userRegister(vo);
+		if(count == 1)
+		{
+			System.out.println("회원등록 완료");
+			result.put("result", "1");		
+		}
+		else {
+			System.out.println("회원등록 실패");
+			result.put("result", "0");	
+		}
+		return result;
+	}
+	
 	
 	
 	
