@@ -8,7 +8,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="./resources/js/fnMain.js" charset="UTF-8"></script>
 <script src="./resources/js/main.js" charset="UTF-8"></script>
-<link rel="stylesheet" type="text/css" href="./resources/css/searchEmail.css">ㄴ
+<link rel="stylesheet" type="text/css" href="./resources/css/searchEmail.css">
 </head>
 <body style="background-color: white;">
 	<div class="clearfix" id="customer">
@@ -50,50 +50,44 @@
 						</div>
 
 						<div class="rsltArea">
-							<!-- <p>
-								아이디는 <span class="fc_b2"> ks**87</span>입니다. <em>[2020-02-25
-									에 회원가입하셨습니다.]</em>
-							</p> -->
 						</div>
 					</div>
 					
 					<!--/#find_id/-->
 
 					<div id="find_pw" class="find_idpw">
-						<h1 class="tit">임시 비밀번호 발급</h1>
+						<h1 class="tit">비밀번호 재설정</h1>
 						<p class="sub-tit">
-							가입하신 이메일 또는 휴대폰번호를 입력, 본인인증을 통해 이메일<br> 또는 휴대폰번호로 임시
-							비밀번호를 보내드립니다.<br> 확인 후 로그인하셔서 반드시 비밀번호를 변경하시기 바랍니다.
+							가입하신 이메일과 휴대폰번호를 입력, 이메일 본인인증을 통해<br> 
+							비밀번호 재설정을 해도록 도와드리겠습니다.
 						</p>
-						<div class="radio-wrap">
+						<!-- <div class="radio-wrap">
 							<label> 
 								<input type="radio" name="find_pw_type"	value="email" checked="checked"> 이메일로 찾기
 							</label> 
 							<label> 
 								<input type="radio" name="find_pw_type"	value="mobile"> 휴대폰 번호로 찾기
 							</label>
-						</div>
+						</div> -->
 						<div id="find_pw_input_wrap">
 							<div class="find-info">
 								<ul class="frm-list">
-									<li>
-										<label>ID</label> 
-										<input type="text" name="user_id" id="user_id" value="" class="MS_input_txt" size="10" maxlength="12">
-									</li>
 									<li id="find_pw_email_wrap">
-										<label>E-MAIL</label> 
-										<input type="text" id="email" name="email" class="MS_input_txt"	value="" maxlength="80" title="이메일 주소" placeholder=""	onfocus="document.form1.focus_ok.value='yes'">
+										<!-- <label>E-MAIL</label>  -->
+										<input type="text" id="emailAutNum" name="email" class="MS_input_txt"	maxlength="80" placeholder="이메일 주소">
 									</li>
-									<li id="find_pw_mobile_wrap" style="display: none;">
-										<label>PHONE NUMBER</label> 
-										<input type="text" id="mobile" name="mobile" class="MS_input_txt" value="" maxlength="20" title="휴대폰번호">
+									<li id="find_pw_mobile_wrap">
+										<!-- <label>PHONE NUMBER</label>  -->
+										<input type="text" id="mobileAutNum" name="mobile" class="MS_input_txt" maxlength="13" placeholder="핸드폰 번호" onkeyup="telValidate(this)">
 									</li>
 								</ul>
+								<div class="rsltArea2">
+								</div>
 								<div class="btn-area">
-									<a href="javascript:find_type('find_pw');"
-										class="CSSbuttonWhite info-confirm">임시 비밀번호 발급</a> <a
-										href="/shop/member.html?type=login&amp;returnurl=%2Fhtml%2Fmainm.html"
-										class="CSSbuttonBlack info-confirm">로그인</a>
+									<a class="CSSbuttonWhite info-confirm" onclick="autNumCilck()">이메일 인증번호 발송</a> 
+									<input type="text" id="autNum" name="autNum" class="MS_input_txt" maxlength="13" placeholder="인증번호 입력" style="display: none;">
+									<a href=""	class="CSSbuttonWhite info-confirm autNumConfirm" style="display: none;">인증번호 확인</a>
+									<a href="/home.do" class="CSSbuttonBlack info-confirm">로그인</a>
 								</div>
 							</div>
 						</div>

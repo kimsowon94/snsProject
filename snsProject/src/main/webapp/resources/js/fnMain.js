@@ -421,7 +421,39 @@ function searchEmail() {
 			alert("오류");
 		}			
 	})
+}
+
+// 이메일 인증 버튼 클릭
+function autNumCilck() {
+	var userEmail = $("#emailAutNum").val();
+	var userPhone = $("#mobileAutNum").val();
 	
+	$.ajax({
+		url : "/autNumCilck.do",
+		dataType : "JSON",
+		type : "POST",
+		data : {
+					"userEmail" : userEmail, 
+					"userPhone" : userPhone,
+		},
+		success : function(data, textStatus, jqXHR) 
+		{
+			if(data.result == "0")
+			{
+				$(".rsltArea2").css("color","red");
+				$(".rsltArea2").text("등록된 정보가 없습니다.");
+			}else{
+				$(".rsltArea2").css("display","none");
+				$("#autNum").css("display","block");
+				$(".autNumConfirm").css("display","block");
+				$(".autNumConfirmBtn").css("display","block");
+			}
+		},
+		error : function() 
+		{
+			alert("오류");
+		}			
+	})
 	
 }
 

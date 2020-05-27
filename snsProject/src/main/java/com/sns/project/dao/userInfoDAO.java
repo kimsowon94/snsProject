@@ -23,4 +23,7 @@ public interface userInfoDAO {
 	
 	// 등록된 이메일 찾기
 	public String searchUserEmail(userInfoVO vo)throws Exception;
+	
+	// 이메일 인증번호 발송 클릭시
+	public int autNumCilck(userInfoVO vo)throws Exception;
 }

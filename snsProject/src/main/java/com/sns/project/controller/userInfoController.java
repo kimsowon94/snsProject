@@ -9,10 +9,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -244,6 +248,27 @@ public class userInfoController {
 		return result;
 	}
 	
+	// 이메일 인증번호 발송 클릭 시
+	@RequestMapping(value="/autNumCilck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, String> autNumCilck(userInfoVO vo) throws Exception
+	{
+		HashMap<String, String> result = new HashMap<String, String>();
+		
+		
+		int count = service.autNumCilck(vo);
+		
+		if(count == 1)
+		{
+			System.out.println("인증번호 발송 해야함");
+			result.put("result", "1");
+		}else {
+			System.out.println("인증번호 발송 하면 안댕");
+			result.put("result", "0");
+		}
+		return result;
+	}
+	
 	
 	
 	
@@ -304,6 +329,7 @@ public class userInfoController {
 	}
 	// --------------------------------------------------------------------------------------
 	
+	// 이메일 마스킹
 	private static String getMaskedEmail(String userEmail) {
 	      /*
 	      * 요구되는 메일 포맷
@@ -331,8 +357,7 @@ public class userInfoController {
 	      }
 	      return userEmail;
 	   }
-
-
+	
 	
 
 }

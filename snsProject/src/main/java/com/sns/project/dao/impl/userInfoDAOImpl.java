@@ -48,5 +48,10 @@ public class userInfoDAOImpl implements userInfoDAO{
 		return sqlsession.selectOne("userInfoDAO.searchUserEmail", vo);
 	}
 
+	@Override
+	public int autNumCilck(userInfoVO vo) throws Exception {
+		return sqlsession.selectOne("userInfoDAO.autNumCilck", vo);
+	}
+
 
 }

@@ -46,6 +46,11 @@ public class userinfoServiceImpl implements userinfoService {
 		return userInfoDao.searchUserEmail(vo);
 	}
 
+	@Override
+	public int autNumCilck(userInfoVO vo) throws Exception {
+		return userInfoDao.autNumCilck(vo);
+	}
+
 	
 	
 }
