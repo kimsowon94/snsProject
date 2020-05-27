@@ -220,7 +220,7 @@ a{
 				<input type="text" placeholder="Email" name="userEmail" id="userEmail"> 
 				<input type="password" placeholder="Password" name="userPw" id="userPw"> 
 				<input type="button" value="Login" onclick="fnLogin()"> 
-				<a href="">비밀번호 찾기</a>
+				<a href="searchEmailPw.do">이메일/비밀번호 찾기</a>
 			</div>
 			<div class="register-show">
 				<h2>REGISTER</h2>

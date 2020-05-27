@@ -4,10 +4,13 @@ package com.sns.project.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -142,9 +145,7 @@ public class userInfoController {
 
 		session.invalidate();
 
-		System.out.println("session에 아이디값 남아있니? :" + id);
-
-		return "login";
+		return "redirect:home.do";
 		
 	}
 	
@@ -217,6 +218,32 @@ public class userInfoController {
 		return result;
 	}
 	
+	// 비밀번호/ 이메일 찾기 페이지 이동
+	@RequestMapping(value="searchEmailPw.do", method = RequestMethod.GET)
+	public String searchEmailPw()
+	{
+		return "emailPwSearch";
+	}
+	
+	@RequestMapping(value="/searchUserEmail.do", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, String> searchUserEmail(userInfoVO vo) throws Exception
+	{
+		HashMap<String, String> result = new HashMap<String, String>();
+		String userEmail = service.searchUserEmail(vo);
+		
+		if(userEmail == null)
+		{
+			System.out.println("등록된 정보 없음");
+			result.put("result", "0");
+		}else
+		{
+			System.out.println("등록 정보 있음");
+			result.put("result", getMaskedEmail(userEmail));
+		}
+		return result;
+	}
+	
 	
 	
 	
@@ -276,6 +303,36 @@ public class userInfoController {
 		
 	}
 	// --------------------------------------------------------------------------------------
+	
+	private static String getMaskedEmail(String userEmail) {
+	      /*
+	      * 요구되는 메일 포맷
+	      * {userId}@domain.com
+	      * */
+	      String regex = "\\b(\\S+)+@(\\S+.\\S+)";
+	      Matcher matcher = Pattern.compile(regex).matcher(userEmail);
+	      if (matcher.find()) {
+	         String id = matcher.group(1); // 마스킹 처리할 부분인 userId
+	         /*
+	         * userId의 길이를 기준으로 세글자 초과인 경우 뒤 세자리를 마스킹 처리하고,
+	         * 세글자인 경우 뒤 두글자만 마스킹,
+	         * 세글자 미만인 경우 모두 마스킹 처리
+	         */
+	         int length = id.length();
+	         if (length < 3) {
+	            char[] c = new char[length];
+	            Arrays.fill(c, '*');
+	            return userEmail.replace(id, String.valueOf(c));
+	         } else if (length == 3) {
+	            return userEmail.replaceAll("\\b(\\S+)[^@][^@]+@(\\S+)", "$1**@$2");
+	         } else {
+	            return userEmail.replaceAll("\\b(\\S+)[^@][^@][^@]+@(\\S+)", "$1***@$2");
+	         }
+	      }
+	      return userEmail;
+	   }
+
+
 	
 
 }

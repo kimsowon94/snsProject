@@ -43,5 +43,10 @@ public class userInfoDAOImpl implements userInfoDAO{
 		return sqlsession.insert("userInfoDAO.userRegister", vo);
 	}
 
+	@Override
+	public String searchUserEmail(userInfoVO vo) throws Exception {
+		return sqlsession.selectOne("userInfoDAO.searchUserEmail", vo);
+	}
+
 
 }

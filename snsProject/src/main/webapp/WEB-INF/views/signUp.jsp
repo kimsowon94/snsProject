@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>회원가입</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="./resources/js/fnMain.js" charset="UTF-8"></script>
@@ -100,7 +101,7 @@ a {
     <input type="text" placeholder ="핸드폰번호를 입력하세요." name="userPhone" id="userPhone" maxlength="13" required="required" onkeyup="telValidate(this)">
     
     <label for="name"><b>name</b></label>
-    <input type="text" placeholder="닉네임을 입력하세요." name="userName" id="userNameRe" required maxlength="10">
+    <input type="text" placeholder="이름을 입력하세요." name="userName" id="userNameRe" required maxlength="10">
     
     <hr>
     <input type="button" class="registerbtn" onclick="fnUserRegister()" value="등록하기">

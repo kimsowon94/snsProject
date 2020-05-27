@@ -20,4 +20,7 @@ public interface userInfoDAO {
 	
 	// 회원가입
 	public int userRegister(userInfoVO vo)throws Exception;
+	
+	// 등록된 이메일 찾기
+	public String searchUserEmail(userInfoVO vo)throws Exception;
 }

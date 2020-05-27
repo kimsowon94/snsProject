@@ -41,6 +41,11 @@ public class userinfoServiceImpl implements userinfoService {
 		return userInfoDao.userRegister(vo);
 	}
 
+	@Override
+	public String searchUserEmail(userInfoVO vo) throws Exception {
+		return userInfoDao.searchUserEmail(vo);
+	}
+
 	
 	
 }

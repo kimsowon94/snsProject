@@ -390,4 +390,39 @@ function fnValueCheck() {
 	return true;
 }
 
+// 이메일 찾기
+function searchEmail() {
+	var userName = $("#find_name_userName").val();
+	var userPhone = $("#find_id_mobile").val();
+	
+	$.ajax({
+		url : "/searchUserEmail.do",
+		dataType : "JSON",
+		type : "POST",
+		data : {
+					"userName" : userName, 
+					"userPhone" : userPhone,
+		},
+		success : function(data, textStatus, jqXHR) 
+		{
+			if(data.result == "0")
+			{
+				$(".rsltArea").css("color","red");
+				$(".rsltArea").text("등록된 회원정보가 없습니다.");
+			}
+			else
+			{
+				$(".rsltArea").css("color","blue");
+				$(".rsltArea").text("등록된 이메일 주소는 " + data.result + "입니다.");
+			}
+		},
+		error : function() 
+		{
+			alert("오류");
+		}			
+	})
+	
+	
+}
+
 
