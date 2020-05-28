@@ -427,6 +427,9 @@ function searchEmail() {
 function autNumCilck() {
 	var userEmail = $("#emailAutNum").val();
 	var userPhone = $("#mobileAutNum").val();
+	// 인증번호 담을 변수
+	var num;
+	
 	
 	$.ajax({
 		url : "/autNumCilck.do",
@@ -436,17 +439,21 @@ function autNumCilck() {
 					"userEmail" : userEmail, 
 					"userPhone" : userPhone,
 		},
-		success : function(data, textStatus, jqXHR) 
+		success : function(data) 
 		{
-			if(data.result == "0")
+			if(data== "1")
 			{
 				$(".rsltArea2").css("color","red");
 				$(".rsltArea2").text("등록된 정보가 없습니다.");
 			}else{
-				$(".rsltArea2").css("display","none");
+				$(".rsltArea2").css("color","blue");
+				$(".rsltArea2").text("인증번호가 발송되었습니다.");
 				$("#autNum").css("display","block");
 				$(".autNumConfirm").css("display","block");
 				$(".autNumConfirmBtn").css("display","block");
+				$(".autNumSend").text("이메일 인증번호 재발송");
+				num = data;
+				$("#autNum_hidden").val(num);
 			}
 		},
 		error : function() 
@@ -454,6 +461,48 @@ function autNumCilck() {
 			alert("오류");
 		}			
 	})
+	
+	
+
+}
+
+// 비밀번호 재설정
+function fnUserPw_re() {
+	var userPw = $("#userPw_re1").val();
+	var userPw2 = $("#userPw_re2").val();
+	var userEmail = $("#emailAutNum").val();
+	var userPhone = $("#mobileAutNum").val();
+	
+	if(userPw != userPw2)
+	{
+		alert("비밀번호가 일치하지 않습니다.");
+	}else{
+		$.ajax({
+			url : "/userPw_reple.do",
+			dataType : "JSON",
+			type : "POST",
+			data : {
+						"userPw" : userPw, 
+						"userEmail" : userEmail, 
+						"userPhone" : userPhone,
+			},
+			success : function(data, textStatus, jqXHR) 
+			{
+				if(data.result == "1"){
+					alert("비밀번호 재설정이 완료되었습니다.");
+					location.href = "home.do";
+				}else{
+					alert("비밀번호 재설정 오류, 다시시도 바랍니다.");
+				}
+					
+			},
+			error : function() 
+			{
+				alert("오류");
+			}			
+		})
+	}
+	
 	
 }
 

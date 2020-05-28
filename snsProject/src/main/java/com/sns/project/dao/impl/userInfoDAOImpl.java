@@ -53,5 +53,10 @@ public class userInfoDAOImpl implements userInfoDAO{
 		return sqlsession.selectOne("userInfoDAO.autNumCilck", vo);
 	}
 
+	@Override
+	public int userPwReple(userInfoVO vo) throws Exception {
+		return sqlsession.update("userInfoDAO.userPwReple", vo);
+	}
+
 
 }

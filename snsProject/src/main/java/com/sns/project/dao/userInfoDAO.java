@@ -26,4 +26,7 @@ public interface userInfoDAO {
 	
 	// 이메일 인증번호 발송 클릭시
 	public int autNumCilck(userInfoVO vo)throws Exception;
+	
+	// 비밀번호 재설정
+	public int userPwReple(userInfoVO vo)throws Exception;
 }

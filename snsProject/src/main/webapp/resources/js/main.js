@@ -58,4 +58,27 @@ $(document).ready(function() {
 			$('#pw_check').css('color', 'blue');
 		}
 	});	
+
+})
+
+// 이메일 인증 확인버튼 클릭 시 
+$(document).ready(function() {
+	$(".autNumConfirm").click(function() {
+		var autNum = $("#autNum").val();
+		var num = $("#autNum_hidden").val();
+	
+		if (num == autNum) {
+			alert("인증이 완료되었습니다.");
+			$(".rsltArea2").css("display", "none");
+			$(".searchPw_ul").css("display", "none");
+			$(".autNumSend").css("display", "none");
+			$("#autNum").css("display", "none");
+			$(".autNumConfirm").css("display", "none");
+			$("#userPw_re1").css("display", "block");
+			$("#userPw_re2").css("display", "block");
+			$(".userPw_reBtn").css("display", "block");
+		} else if (num != autNum) {
+			alert("인증에 실패하였습니다. 인증번호를 다시한번 확인해주세요.");
+			}
+		})
 })

@@ -51,6 +51,11 @@ public class userinfoServiceImpl implements userinfoService {
 		return userInfoDao.autNumCilck(vo);
 	}
 
+	@Override
+	public int userPwReple(userInfoVO vo) throws Exception {
+		return userInfoDao.userPwReple(vo);
+	}
+
 	
 	
 }

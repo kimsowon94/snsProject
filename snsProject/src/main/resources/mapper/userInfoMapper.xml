@@ -75,4 +75,9 @@
 		WHERE USER_PHONE = #{userPhone} AND USER_EMAIL = #{userEmail}
 	</select>
 	
+	<update id="userPwReple">
+		UPDATE SNS_USERINFO
+		SET USER_PW = #{userPw}
+		WHERE USER_PHONE = #{userPhone} AND USER_EMAIL = #{userEmail}
+	</update>
 </mapper>

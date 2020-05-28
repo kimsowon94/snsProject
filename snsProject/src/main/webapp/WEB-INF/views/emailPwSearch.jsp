@@ -17,6 +17,8 @@
 			<div id="findWrap">
 
 				<form id="form1">
+				<input type="hidden" id="autNum_hidden">
+				
 					<div id="find_id" class="find_idpw">
 						<h1 class="tit">이메일 찾기</h1>
 						<p class="sub-tit">회원가입 시, 입력하신 이름 + 휴대폰 번호로 이메일을 확인하실
@@ -71,7 +73,7 @@
 						</div> -->
 						<div id="find_pw_input_wrap">
 							<div class="find-info">
-								<ul class="frm-list">
+								<ul class="frm-list searchPw_ul">
 									<li id="find_pw_email_wrap">
 										<!-- <label>E-MAIL</label>  -->
 										<input type="text" id="emailAutNum" name="email" class="MS_input_txt"	maxlength="80" placeholder="이메일 주소">
@@ -83,10 +85,13 @@
 								</ul>
 								<div class="rsltArea2">
 								</div>
-								<div class="btn-area">
-									<a class="CSSbuttonWhite info-confirm" onclick="autNumCilck()">이메일 인증번호 발송</a> 
+								<div class="btn-area rePwBtn">
+									<a class="CSSbuttonWhite info-confirm autNumSend" onclick="autNumCilck()">이메일 인증번호 발송</a> 
 									<input type="text" id="autNum" name="autNum" class="MS_input_txt" maxlength="13" placeholder="인증번호 입력" style="display: none;">
-									<a href=""	class="CSSbuttonWhite info-confirm autNumConfirm" style="display: none;">인증번호 확인</a>
+									<a class="CSSbuttonWhite info-confirm autNumConfirm" style="display: none;">인증번호 확인</a>
+									<input type="password" id="userPw_re1" name="userPw_re1" class="MS_input_txt" maxlength="20" placeholder="비밀번호 입력" style="display: none;">
+									<input type="password" id="userPw_re2" name="userPw_re2" class="MS_input_txt" maxlength="20" placeholder="비밀번호 재입력" style="display: none;">
+									<a class="CSSbuttonWhite info-confirm userPw_reBtn" style="display: none;" onclick="fnUserPw_re()">비밀번호 재설정</a>
 									<a href="/home.do" class="CSSbuttonBlack info-confirm">로그인</a>
 								</div>
 							</div>

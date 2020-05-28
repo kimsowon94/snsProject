@@ -9,19 +9,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sns.project.CommonMail;
+import com.sns.project.ExistsEmailException;
 import com.sns.project.HomeController;
 import com.sns.project.service.userStoryService;
 import com.sns.project.service.userinfoService;
@@ -44,6 +46,15 @@ public class userInfoController {
 	
 	@Autowired
 	userStoryService storyService;
+	
+	private CommonMail cm = new CommonMail();
+	
+	@Autowired
+	private JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+	
+	@Value("${mailSender.username}")
+	private String username;
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -248,34 +259,75 @@ public class userInfoController {
 		return result;
 	}
 	
-	// 이메일 인증번호 발송 클릭 시
-	@RequestMapping(value="/autNumCilck.do", method = RequestMethod.POST)
+	// 이메일 인증
+	// 비밀번호 재설정 시 이메일 코드 인증하는 부분
 	@ResponseBody
-	public HashMap<String, String> autNumCilck(userInfoVO vo) throws Exception
-	{
-		HashMap<String, String> result = new HashMap<String, String>();
-		
-		
+	@RequestMapping(value = "autNumCilck.do")
+	public String autNumCilck(@RequestParam(value = "userEmail") String userEmail, userInfoVO vo) throws Exception {
+
+		System.out.println("authEmail에 넘겨받은 값 :" + userEmail);
+		String code = cm.setCode(); // 인증번호 코드 입력
+
 		int count = service.autNumCilck(vo);
-		
-		if(count == 1)
-		{
-			System.out.println("인증번호 발송 해야함");
-			result.put("result", "1");
-		}else {
-			System.out.println("인증번호 발송 하면 안댕");
-			result.put("result", "0");
+
+		try {
+
+			if (count == 0) {
+				throw new ExistsEmailException();
+			} else {
+				MimeMessage msg = mailSender.createMimeMessage();
+				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
+
+				msgHelper.setFrom(username);
+				System.out.println(username);
+				msgHelper.setSubject("비밀번호 재설정 인증번호 발송 메일입니다.");
+
+				String htmlContent = "<h3 style=\"text-align: center\"><u>Welcome! Do Dream</u></h3><div align=\"center\"><br>"
+						+ "<div align=\"center\"><br></div>"
+						+ " 본 메일은 발신 전용 메일입니다.<br> 아래의 인증번호를 정확히 입력해주세요. <br>" + "인증번호 " + "<u><mark>" + code
+						+ "</mark></u>" + " 를 입력해주세요" + "</div>";
+
+				msgHelper.setText(htmlContent, true);
+
+				msgHelper.setTo(userEmail);
+
+				mailSender.send(msg);
+			}
+		} catch (ExistsEmailException e) {
+			code = "1"; // 중복이메일
+		} catch (Exception e) {
+			e.printStackTrace();
+			code = "0"; // 인증메일발송이 실패
 		}
-		return result;
+		System.out.println("코드값 :" + code);
+
+		return code;
 	}
 	
+	// 비밀번호 재설정 
+	@RequestMapping(value="userPw_reple.do", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, String> userPwReple(userInfoVO vo) throws Exception
+	{
+		HashMap<String, String> result = new HashMap<String, String>();
+		int count = service.userPwReple(vo);
+		
+		if(count == 0)
+		{
+			System.out.println("비밀번호 업데이트 완료");
+			result.put("result", "0");
+		}else
+		{
+			System.out.println("비밀번호 업데이트 실패");
+			result.put("result", "1");
+		}
+		return result;
+		
+	}
+
+
 	
-	
-	
-	
-	
-	
-	
+
 	// 파일 업로드
 	//--------------------------------------------------------------------------------------
 	private String fileUpload(MultipartFile multipartFile, String savePath ) {
@@ -359,5 +411,4 @@ public class userInfoController {
 	   }
 	
 	
-
 }
