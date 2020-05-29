@@ -29,4 +29,7 @@ public interface userInfoDAO {
 	
 	// 비밀번호 재설정
 	public int userPwReple(userInfoVO vo)throws Exception;
+	
+	// 친구목록 출력
+	public List<userInfoVO> friendList(String userEmail) throws Exception;
 }

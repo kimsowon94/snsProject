@@ -56,6 +56,11 @@ public class userinfoServiceImpl implements userinfoService {
 		return userInfoDao.userPwReple(vo);
 	}
 
+	@Override
+	public List<userInfoVO> friendList(String userEmail) throws Exception {
+		return userInfoDao.friendList(userEmail);
+	}
+
 	
 	
 }

@@ -49,6 +49,84 @@ html, body, h1, h2, h3, h4, h5 {
 	border: 0; 
 }
 </style>
+<style>
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 25%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+</style>
+
+
 <body class="w3-theme-l5">
 <form class="main" enctype="multipart/form-data">
 	<!-- 세션값  -->
@@ -158,10 +236,9 @@ html, body, h1, h2, h3, h4, h5 {
 				<!-- Accordion -->
 				<div class="w3-card w3-round">
 					<div class="w3-white">
-						<button onclick="myFunction('Demo1')"
-							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My
-							Groups
+						<button type="button" class="w3-button w3-block w3-theme-l1 w3-left-align" id="myBtn">
+							<i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> 
+							친구 목록
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
 							<p>Some text..</p>
@@ -384,5 +461,88 @@ html, body, h1, h2, h3, h4, h5 {
 		</p>
 	</footer>
 </form>
+
+	<!-- 친구목록 모달 -->
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<p>친구 목록</p>
+			<input type="text" id="myInput" onkeyup="myFunction()"	placeholder="Search for names.." title="Type in a name">
+
+			<table id="myTable">
+				
+				<tr class="header">
+					<th style="width: 60%;">이름</th>
+					<th style="width: 60%;"></th>
+				</tr>
+				<c:forEach var="a" items="${friendList }">
+				<tr onclick="fnFri_prof(${a.friendSe})">
+					<c:if test="${a.userPhoto != null }">
+					<td><img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px">${a.userName }</td>
+					</c:if>
+					<c:if test="${a.userPhoto == null }">
+					<td><img src="../resources/img/default.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px">${a.userName }</td>
+					</c:if>
+					<td><input type="button" value="친구삭제"></td>
+				</tr>
+				</c:forEach>
+			</table>
+
+		</div>
+	</div>
+
+	<!-- 친구목록 모달 -->
+<script type="text/javascript">
+//Get the modal
+var modal = document.getElementById("myModal");
+
+//Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+//Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+//When the user clicks the button, open the modal 
+btn.onclick = function() {
+modal.style.display = "block";
+}
+
+//When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+modal.style.display = "none";
+}
+
+//When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modal) {
+ modal.style.display = "none";
+}
+}
+</script>
+
+
+<!-- 친구목록 찾기 script -->
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
+
 </body>
 </html>

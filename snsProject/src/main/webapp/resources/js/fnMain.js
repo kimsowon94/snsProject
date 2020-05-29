@@ -425,6 +425,8 @@ function searchEmail() {
 
 // 이메일 인증 버튼 클릭
 function autNumCilck() {
+	$(".fa-spin").css("display","");
+	
 	var userEmail = $("#emailAutNum").val();
 	var userPhone = $("#mobileAutNum").val();
 	// 인증번호 담을 변수
@@ -441,7 +443,7 @@ function autNumCilck() {
 		},
 		success : function(data) 
 		{
-			if(data== "1")
+			if(data== "0")
 			{
 				$(".rsltArea2").css("color","red");
 				$(".rsltArea2").text("등록된 정보가 없습니다.");
@@ -502,7 +504,11 @@ function fnUserPw_re() {
 			}			
 		})
 	}
-	
+}
+
+function fnFri_prof(a) {
+	var friendSe = a;
+	alert(a);
 	
 }
 

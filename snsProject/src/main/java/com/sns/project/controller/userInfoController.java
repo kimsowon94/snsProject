@@ -88,8 +88,9 @@ public class userInfoController {
 		String userEmail = (String) session.getAttribute("userEmail");
 		List<userInfoVO> list = service.userProfile(userEmail);
 		List<userStoryVO> storyList = storyService.userPostList(userEmail);
+		List<userInfoVO> friendList = service.friendList(userEmail);
 		
-		
+		model.addAttribute("friendList", friendList);
 		model.addAttribute("storyList", storyList);
 		model.addAttribute("list", list);
 		
@@ -314,11 +315,11 @@ public class userInfoController {
 		
 		if(count == 0)
 		{
-			System.out.println("비밀번호 업데이트 완료");
+			System.out.println("비밀번호 업데이트 실패");
 			result.put("result", "0");
 		}else
 		{
-			System.out.println("비밀번호 업데이트 실패");
+			System.out.println("비밀번호 업데이트 완료");
 			result.put("result", "1");
 		}
 		return result;
@@ -339,9 +340,7 @@ public class userInfoController {
 		}
 		
 		try {
-			
 			Long size = multipartFile.getSize();
-			
 			
 			fileName = genSaveFileName(originFilename);		
 			writeFile(multipartFile, fileName, savePath);	
@@ -369,7 +368,8 @@ public class userInfoController {
 		return fileName;	
 	}
 
-	private boolean writeFile(MultipartFile multipartFile, String saveFileName, String savePath)throws IOException{
+	private boolean writeFile(MultipartFile multipartFile, String saveFileName, String savePath)throws IOException
+	{
 		boolean result = false;
 
 		byte[] data = multipartFile.getBytes();
@@ -382,7 +382,8 @@ public class userInfoController {
 	// --------------------------------------------------------------------------------------
 	
 	// 이메일 마스킹
-	private static String getMaskedEmail(String userEmail) {
+	private static String getMaskedEmail(String userEmail) 
+	{
 	      /*
 	      * 요구되는 메일 포맷
 	      * {userId}@domain.com
@@ -409,6 +410,4 @@ public class userInfoController {
 	      }
 	      return userEmail;
 	   }
-	
-	
 }

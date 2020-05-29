@@ -8,8 +8,16 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="./resources/js/fnMain.js" charset="UTF-8"></script>
 <script src="./resources/js/main.js" charset="UTF-8"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="./resources/css/searchEmail.css">
 </head>
+<style>
+.fa {
+  margin-left: -12px;
+  margin-right: 8px;
+}
+
+</style>
 <body style="background-color: white;">
 	<div class="clearfix" id="customer">
 		<br class="clear"> <br class="clear">
@@ -84,9 +92,14 @@
 									</li>
 								</ul>
 								<div class="rsltArea2">
+								
 								</div>
+								
 								<div class="btn-area rePwBtn">
-									<a class="CSSbuttonWhite info-confirm autNumSend" onclick="autNumCilck()">이메일 인증번호 발송</a> 
+									<a class="CSSbuttonWhite info-confirm autNumSend" onclick="autNumCilck()">
+										<i class="fa fa-spinner fa-spin" style="display: none;"></i>
+										이메일 인증번호 발송 									
+									</a> 
 									<input type="text" id="autNum" name="autNum" class="MS_input_txt" maxlength="13" placeholder="인증번호 입력" style="display: none;">
 									<a class="CSSbuttonWhite info-confirm autNumConfirm" style="display: none;">인증번호 확인</a>
 									<input type="password" id="userPw_re1" name="userPw_re1" class="MS_input_txt" maxlength="20" placeholder="비밀번호 입력" style="display: none;">

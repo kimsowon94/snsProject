@@ -58,5 +58,10 @@ public class userInfoDAOImpl implements userInfoDAO{
 		return sqlsession.update("userInfoDAO.userPwReple", vo);
 	}
 
+	@Override
+	public List<userInfoVO> friendList(String userEmail) throws Exception {
+		return sqlsession.selectList("userInfoDAO.friendList", userEmail);
+	}
+
 
 }

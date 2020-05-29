@@ -13,6 +13,10 @@
 		<result property="createTime" column="CREATE_TIME"/>
 		<result property="modifiedTime" column="MODIFIED_TIME"/>
 		<result property="userPhoto" column="USER_PHOTO"/>
+		<result property="friendNum" column="FRIEND_NUM"/>
+		<result property="friendDate" column="FRIEND_DATE"/>
+		<result property="friendRe" column="FRIEND_RE"/>
+		<result property="friendSe" column="FRIEND_SE"/>
 	</resultMap>
 	
 	<select id="userLogin" resultType="Integer">
@@ -80,4 +84,15 @@
 		SET USER_PW = #{userPw}
 		WHERE USER_PHONE = #{userPhone} AND USER_EMAIL = #{userEmail}
 	</update>
+	
+	<select id="friendList" resultMap="userInfoVO">
+		SELECT B.FRIEND_SE,(SELECT USER_NAME
+                    		FROM SNS_USERINFO
+                   			 WHERE USER_EMAIL = B.FRIEND_SE) AS "USER_NAME"
+                  		  ,(SELECT USER_PHOTO
+                    		FROM SNS_USERINFO
+                    		WHERE USER_EMAIL = B.FRIEND_SE) AS "USER_PHOTO"
+		FROM SNS_USERINFO A, SNS_FRIEND B
+		WHERE A.USER_EMAIL = B.FRIEND_RE AND B.FRIEND_RE = #{userEmail}
+	</select>
 </mapper>

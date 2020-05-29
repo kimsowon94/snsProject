@@ -208,9 +208,9 @@ a{
 		</div> -->
 
 		<div class="register-info-box">
-			<h2>Don't have an account?</h2>
-			<p>Lorem ipsum dolor sit amet</p>
-			<label id="label-login" for="log-login-show" onclick="location.href='registerUser.do'">Register</label> 
+			<h2>아직 계정이 없으신가요?</h2>
+			<p>친구들과 소통해보세요.</p>
+			<label id="label-login" for="log-login-show" onclick="location.href='registerUser.do'">회원가입</label> 
 			<input type="radio" name="active-log-panel" id="log-login-show">
 		</div>
 
