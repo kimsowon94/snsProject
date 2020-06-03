@@ -496,7 +496,7 @@ function fnUserPw_re() {
 				}else{
 					alert("비밀번호 재설정 오류, 다시시도 바랍니다.");
 				}
-					 
+					  
 			},
 			error : function() 
 			{
