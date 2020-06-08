@@ -66,7 +66,7 @@ $(document).ready(function() {
 	$(".autNumConfirm").click(function() {
 		var autNum = $("#autNum").val();
 		var num = $("#autNum_hidden").val();
-	
+
 		if (num == autNum) {
 			alert("인증이 완료되었습니다.");
 			$(".rsltArea2").css("display", "none");
@@ -79,6 +79,6 @@ $(document).ready(function() {
 			$(".userPw_reBtn").css("display", "block");
 		} else if (num != autNum) {
 			alert("인증에 실패하였습니다. 인증번호를 다시한번 확인해주세요.");
-			}
-		})
+		}
+	})
 })

@@ -92,7 +92,16 @@
                   		  ,(SELECT USER_PHOTO
                     		FROM SNS_USERINFO
                     		WHERE USER_EMAIL = B.FRIEND_SE) AS "USER_PHOTO"
+                    	  ,(SELECT USER_NUM
+                    		FROM SNS_USERINFO
+                    		WHERE USER_EMAIL = B.FRIEND_SE) AS "USER_NUM"
 		FROM SNS_USERINFO A, SNS_FRIEND B
 		WHERE A.USER_EMAIL = B.FRIEND_RE AND B.FRIEND_RE = #{userEmail}
+	</select>
+	
+	<select id="follow_user" resultMap="userInfoVO">
+		SELECT USER_NUM, USER_NAME, USER_PHONE, USER_CAREER, USER_PHOTO, USER_EMAIL
+		FROM SNS_USERINFO
+		WHERE USER_NUM = #{userNum}
 	</select>
 </mapper>

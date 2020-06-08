@@ -32,4 +32,7 @@ public interface userinfoService {
 	
 	// 친구목록 출력
 	public List<userInfoVO> friendList(String userEmail) throws Exception;
+	
+	// 친구 sns화면 출력
+	public List<userInfoVO> follow_user(String userNum) throws Exception;
 }

@@ -331,23 +331,8 @@ html, body, h1, h2, h3, h4, h5 {
 				<div class="w3-row-padding">
 					<div class="w3-col m12">
 						<div class="w3-card w3-round w3-white">
-							<div class="w3-container w3-padding">
-								<h6 class="w3-opacity story">오늘 하루를 남겨볼까요~?</h6>
-								<p contenteditable="true" class="w3-border w3-padding storyContent" id="storyContent"></p>
+						<div class="w3-container w3-padding">
 								
-								<div id="storyImg">
-								
-								</div>
-								
-								<div class="filebox" style="align-items: center;">
-									<label for="storyPhotoReal" >
-									<i class="material-icons" id="storyLabel" >add_a_photo</i></label>
-									<input type="file" id="storyPhotoReal" name="storyPhotoReal" style="display: inline-block;" onclick="fnStoryImg()">
-								</div>
-								
-								<button type="button" class="w3-button w3-theme" onclick="fnPost()">
-									<i class="fa fa-pencil"></i>  Post
-								</button>					
 							</div>
 						</div>
 					</div>
@@ -475,8 +460,9 @@ html, body, h1, h2, h3, h4, h5 {
 					<th style="width: 60%;">이름</th>
 					<th style="width: 60%;"></th>
 				</tr>
+				
 				<c:forEach var="a" items="${friendList }">
-				<tr onclick="javascipt:location.href='follow_user.do?userNum=${a.userNum}'" style="cursor: pointer;">
+				<tr onclick="fnFri_prof(${a.userNum})" style="cursor: pointer;">
 					<c:if test="${a.userPhoto != null }">
 					<td><img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px">${a.userName }</td>
 					</c:if>

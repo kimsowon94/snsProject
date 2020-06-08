@@ -18,9 +18,6 @@
 <link rel="stylesheet" type="text/css" href="./resources/compnent/jquery-ui-1.12.1.custom/jquery-ui.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- 카메라 아이콘, 엑스 아이콘 쓰기 위해.. -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 <style>
 html, body, h1, h2, h3, h4, h5 {
 	font-family: "Open Sans", sans-serif
@@ -131,9 +128,7 @@ html, body, h1, h2, h3, h4, h5 {
 <form class="main" enctype="multipart/form-data">
 	<!-- 세션값  -->
 	<input type="hidden" value="${sessionScope.userEmail }" id="userEmail" name="userEmail">
-	<input type="hidden" id="fileCheck" name="fileCheck" value="N">
-	<input type="hidden" id="storyfileCheck" name="storyfileCheck" value="N">
-	
+
 	<!-- Navbar -->
 	<div class="w3-top">
 		<div class="w3-bar w3-theme-d2 w3-left-align w3-large">
@@ -198,23 +193,17 @@ html, body, h1, h2, h3, h4, h5 {
 				<div class="w3-card w3-round w3-white">
 					<div class="w3-container">
 					<c:forEach items="${list }" var="a">
-						<h4 class="w3-center">나의 프로필</h4>
+						<h4 class="w3-center">프로필</h4>
 							<p class="w3-center" id="plusImg">
 								<c:if test="${a.userPhoto != null}">
 								<img src="../resources/upload/${a.userPhoto }" class="w3-circle" style="height: 106px; width: 106px" alt="Avatar" id="photo">
-								<i class="material-icons" id="imgDelete" style="cursor:pointer; text-align: -webkit-match-parent; display: none;"  onclick="xImgFn()">&#xe14c;</i>
 								</c:if>
-								<i class="material-icons" id="imgDelete" style="position: relative; display:none; left:-1em; top:-1.3em; cursor:pointer" onclick="xImgFn()">&#xe14c;</i>
+			
 								<c:if test="${a.userPhoto == null or a.userPhoto == ''}">
 								<img src="./resources/img/default.jpg" class="w3-circle" style="height: 106px; width: 106px" alt="Avatar" >
 								</c:if>
 							</p>
-							<div class="filebox" style="align-items: center;">
-								<label for="imgFileReal" >
-								<i class="material-icons" id="imgLabel" style="display: none; position: absolute;">add_a_photo</i></label>
-								<input type="file" id="imgFileReal" name="imgFileReal"	onclick="fnImg()" style="display: inline-block;">
-								<!-- <input type="button" value="삭제" id="imgDelete" style="display: none; width: 40px;">	 -->
-							</div>
+							
 							<hr>
 						<p>
 							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
@@ -224,10 +213,8 @@ html, body, h1, h2, h3, h4, h5 {
 						<p>
 							<i class="fa fa-mobile fa-fw w3-margin-right w3-text-theme"></i>
 							<span id="birth">${a.userPhone }</span>
-							<input type="hidden" id="userPhone" name="userPhone" class="input_info" onkeyup="telValidate(this)" maxlength=13 value="${a.userPhone }">
 						</p>
-						<input type="button" class="w3-button w3-theme" id="fnProfile"	onclick="pfUpdate()" value="프로필 수정" style="float: right;">
-						<input type="button" class="w3-button w3-theme" id="fnProfileUpdate" onclick="fnUpdate()" value="확인" style="float: right; display: none;">
+		
 						</c:forEach>
 					</div>
 				</div>
@@ -331,23 +318,8 @@ html, body, h1, h2, h3, h4, h5 {
 				<div class="w3-row-padding">
 					<div class="w3-col m12">
 						<div class="w3-card w3-round w3-white">
-							<div class="w3-container w3-padding">
-								<h6 class="w3-opacity story">오늘 하루를 남겨볼까요~?</h6>
-								<p contenteditable="true" class="w3-border w3-padding storyContent" id="storyContent"></p>
+						<div class="w3-container w3-padding">
 								
-								<div id="storyImg">
-								
-								</div>
-								
-								<div class="filebox" style="align-items: center;">
-									<label for="storyPhotoReal" >
-									<i class="material-icons" id="storyLabel" >add_a_photo</i></label>
-									<input type="file" id="storyPhotoReal" name="storyPhotoReal" style="display: inline-block;" onclick="fnStoryImg()">
-								</div>
-								
-								<button type="button" class="w3-button w3-theme" onclick="fnPost()">
-									<i class="fa fa-pencil"></i>  Post
-								</button>					
 							</div>
 						</div>
 					</div>
@@ -386,6 +358,7 @@ html, body, h1, h2, h3, h4, h5 {
 					</button>
 				</div>
 				</c:forEach>
+				
 			</div>
 
 			<!-- Right Column -->
@@ -475,8 +448,9 @@ html, body, h1, h2, h3, h4, h5 {
 					<th style="width: 60%;">이름</th>
 					<th style="width: 60%;"></th>
 				</tr>
+			<%-- 	
 				<c:forEach var="a" items="${friendList }">
-				<tr onclick="javascipt:location.href='follow_user.do?userNum=${a.userNum}'" style="cursor: pointer;">
+				<tr onclick="fnFri_prof(${a.userNum})" style="cursor: pointer;">
 					<c:if test="${a.userPhoto != null }">
 					<td><img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px">${a.userName }</td>
 					</c:if>
@@ -490,7 +464,7 @@ html, body, h1, h2, h3, h4, h5 {
 					</td>	
 				</tr>
 				</c:forEach>
-				
+				 --%>
 			</table>
 
 		</div>
@@ -518,11 +492,12 @@ modal.style.display = "none";
 }
 
 //When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-if (event.target == modal) {
- modal.style.display = "none";
-}
-}
+
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
 </script>
 
 

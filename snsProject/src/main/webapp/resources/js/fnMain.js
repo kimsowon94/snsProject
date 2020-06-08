@@ -506,10 +506,26 @@ function fnUserPw_re() {
 	}
 }
 
-function fnFri_prof(a) {
-	var friendSe = a;
-	alert(a);
+/*function fnFri_prof(num) {
+	var userNum = num;
 	
-}
+	$.ajax({
+		url : "/follow_user.do",
+		dataType : "HTML",
+		type : "POST",
+		data : {
+					"userNum" : userNum,
+		},
+		success : function(data, textStatus, jqXHR) 
+		{
+			location.href = "followHome.do";
+		},
+		error : function() 
+		{
+			alert("오류");
+		}			
+	})
+	
+}*/
 
 

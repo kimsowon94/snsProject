@@ -61,6 +61,11 @@ public class userinfoServiceImpl implements userinfoService {
 		return userInfoDao.friendList(userEmail);
 	}
 
+	@Override
+	public List<userInfoVO> follow_user(String userNum) throws Exception {
+		return userInfoDao.follow_user(userNum);
+	}
+
 	
 	
 }
