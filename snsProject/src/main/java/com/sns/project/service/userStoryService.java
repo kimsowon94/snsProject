@@ -13,4 +13,7 @@ public interface userStoryService {
 
 	// 게시글 삭제
 	public int delUserStory (userStoryVO storyVo)throws Exception;
+	
+	// follow story출력
+	public List<userStoryVO> followStory(String userNum)throws Exception;
 }

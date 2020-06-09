@@ -30,4 +30,9 @@ public class userStoryDAOImpl implements userStoryDAO{
 		return sqlsession.delete("userStoryDAO.delUserStory", storyVo);
 	}
 
+	@Override
+	public List<userStoryVO> followStory(String userNum) throws Exception {
+		return sqlsession.selectList("userStoryDAO.followStory", userNum);
+	}
+
 }

@@ -126,7 +126,6 @@ html, body, h1, h2, h3, h4, h5 {
 }
 </style>
 
-
 <body class="w3-theme-l5">
 <form class="main" enctype="multipart/form-data">
 	<!-- 세션값  -->
@@ -368,9 +367,6 @@ html, body, h1, h2, h3, h4, h5 {
 							<img src="../resources/storyImg/${a.storyPhoto }" style="width: 100%" class="w3-margin-bottom">
 							</c:if>
 						</div>
-						<!-- <div class="w3-half">
-							<img src="/w3images/nature.jpg" style="width: 100%" class="w3-margin-bottom">
-						</div> -->
 					</div>
 					<button type="button"
 						class="w3-button w3-theme-d1 w3-margin-bottom">
@@ -433,9 +429,11 @@ html, body, h1, h2, h3, h4, h5 {
 				</div>
 				<br>
 
-				<div class="w3-card w3-round w3-white w3-padding-32 w3-center">
+				<div class="w3-card w3-round w3-white w3-padding-32 w3-center" id="weatherDiv">
 					<p>
-						<i class="fa fa-bug w3-xxlarge"></i>
+						<!-- <i class="fa fa-bug w3-xxlarge"></i> -->
+						<img id="weatherImg" style="width: 60%; color">
+						
 					</p>
 				</div>
 
@@ -542,10 +540,11 @@ function myFunction() {
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
-      }
     }       
   }
+  }
 }
+
 </script>
 
 

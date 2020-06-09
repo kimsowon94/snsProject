@@ -529,3 +529,67 @@ function fnUserPw_re() {
 }*/
 
 
+
+function weatherCases(ab) {
+	
+	var ad = ab;
+	if (ad == "Clouds")
+	{
+		return "구름이 많아요";
+	}
+	else if(ad == "Rain")
+	{
+		return "우산 챙기세요";
+	}
+	else if(ad == "Clear")
+	{
+		return "날이 좋아요";
+	}
+	else if(ad == "Thunderstorm")
+	{
+		return "천둥이쳐요!";
+	}
+	else if(ad == "Snow")
+	{
+		return "눈이와요!";
+	}
+	else if(ad == "Drizzle" && ad == "Haze" && ad == "Mist")
+	{
+		return "이슬비가 내려요!";
+	}
+}
+
+	
+var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Bucheon&appid=bb2050bbe3f1d9ebdafc491430502625";
+$.ajax({
+    url: apiURI,
+    dataType: "json",
+    type: "GET",
+    async: "false",
+    success: function(resp) {
+        console.log(resp);
+        console.log("현재온도 : "+ (resp.main.temp- 273.15) );
+        console.log("현재습도 : "+ resp.main.humidity);
+        console.log("날씨 : "+ resp.weather[0].main );
+        console.log("상세날씨설명 : "+ resp.weather[0].description );
+        console.log("날씨 이미지 : "+ resp.weather[0].icon );
+        console.log("바람   : "+ resp.wind.speed );
+        console.log("나라   : "+ resp.sys.country );
+        console.log("도시이름  : "+ resp.name );
+        console.log("구름  : "+ (resp.clouds.all) +"%" ); 
+        
+        
+        
+        var imgURL = "http://openweathermap.org/img/w/" + resp.weather[0].icon + ".png";
+        
+        var ad = resp.weather[0].main;
+       
+        $("#weatherImg").attr("src", imgURL);
+        $("#weatherDiv").append("<p>" + (resp.main.temp- 273.15) + " ℃ <p>");
+        $("#weatherDiv").append("<p style='color:66A6FF;'>" + weatherCases(ad) + "<p>");
+        
+        
+    }
+})
+
+

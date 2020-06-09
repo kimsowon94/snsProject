@@ -328,10 +328,18 @@ public class userInfoController {
 
 	// 친구목록 -> 친구 sns이동
 	@RequestMapping(value="/follow_user.do", method = RequestMethod.GET)
-	public String follow_user(Model model, String userNum) throws Exception
+	public String follow_user(Model model, String userNum,HttpSession session) throws Exception
 	{ 
+		
 		List<userInfoVO> list = service.follow_user(userNum);
+		List<userStoryVO> storyList = storyService.followStory(userNum);
+		
+		List<userInfoVO> profile = service.userProfile((String) session.getAttribute("userEmail"));
+		
 		model.addAttribute("list",list);
+		model.addAttribute("storyList", storyList);
+		model.addAttribute("profile", profile);
+		
 		return "followHome";
 	}
 

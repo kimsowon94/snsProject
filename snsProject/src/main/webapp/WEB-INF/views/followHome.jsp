@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <title>또웡 SNS</title>
@@ -160,7 +161,7 @@ html, body, h1, h2, h3, h4, h5 {
 			</div>
 			<a href="#"	class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account"> 
 			<!-- <img src="/w3images/avatar2.png" class="w3-circle" style="height: 23px; width: 23px" alt="Avatar"> -->
-			<c:forEach items="${list }" var="a">
+			<c:forEach items="${profile }" var="a">
 				<c:if test="${a.userPhoto != null }">
 				<img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px" onclick="if(confirm('로그아웃하시겠습니까?')){location.href='userLogout.do';}">
 				</c:if>
@@ -314,18 +315,10 @@ html, body, h1, h2, h3, h4, h5 {
 
 			<!-- Middle Column -->
 			<div class="w3-col m7">
-
-				<div class="w3-row-padding">
-					<div class="w3-col m12">
-						<div class="w3-card w3-round w3-white">
-						<div class="w3-container w3-padding">
-								
-							</div>
-						</div>
-					</div>
-				</div>
-
+				
+				<c:if test="${fn:length(storyList) > 1}">
 				<c:forEach items="${storyList }" var="a"> 
+				
 				<div class="w3-container w3-card w3-white w3-round w3-margin">
 					<br> 
 					<img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 60px">
@@ -352,12 +345,17 @@ html, body, h1, h2, h3, h4, h5 {
 						class="w3-button w3-theme-d2 w3-margin-bottom">
 						<i class="fa fa-comment"></i> 댓글
 					</button>
-					<!-- 게시글 삭제하기 -->
-					<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="if(confirm('해당 게시글을 삭제하시겠습니까?')){fnDelStory(${a.storyNum});}">
-						<i class="fa fa-trash-o"></i>  삭제
-					</button>
+					
 				</div>
+				
 				</c:forEach>
+				</c:if>
+				
+				<c:if test = "${fn:length(storyList) == 1}">
+				<div class="w3-container w3-card w3-white w3-round w3-margin">
+					<h1>등록된 게시물이 없습니다.</h1>
+				</div>
+				</c:if> 
 				
 			</div>
 

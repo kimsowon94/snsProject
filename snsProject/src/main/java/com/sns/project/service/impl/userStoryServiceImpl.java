@@ -29,5 +29,10 @@ public class userStoryServiceImpl implements userStoryService {
 	public int delUserStory(userStoryVO storyVo) throws Exception {
 		return storyDao.delUserStory(storyVo);
 	}
+
+	@Override
+	public List<userStoryVO> followStory(String userNum) throws Exception {
+		return storyDao.followStory(userNum);
+	}
 	
 }
