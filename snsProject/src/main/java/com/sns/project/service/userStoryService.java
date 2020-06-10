@@ -16,4 +16,10 @@ public interface userStoryService {
 	
 	// follow story출력
 	public List<userStoryVO> followStory(String userNum)throws Exception;
+	
+	// 게시글 좋아요
+	public int likeCk(userStoryVO storyVo)throws Exception;
+	
+	// 좋아요 취소
+	public int likeCkDel(userStoryVO storyVo)throws Exception;
 }

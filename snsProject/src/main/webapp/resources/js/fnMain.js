@@ -560,7 +560,7 @@ function weatherCases(ab) {
 }
 
 	
-var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Bucheon&appid=bb2050bbe3f1d9ebdafc491430502625";
+var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Bucheon&appid=bb2050bbe3f1d9ebdafc491430502625&units=metri";
 $.ajax({
     url: apiURI,
     dataType: "json",
@@ -568,7 +568,7 @@ $.ajax({
     async: "false",
     success: function(resp) {
         console.log(resp);
-        console.log("현재온도 : "+ (resp.main.temp- 273.15) );
+        console.log("현재온도 : "+ (resp.main.temp - 273.15) );
         console.log("현재습도 : "+ resp.main.humidity);
         console.log("날씨 : "+ resp.weather[0].main );
         console.log("상세날씨설명 : "+ resp.weather[0].description );
@@ -583,13 +583,90 @@ $.ajax({
         var imgURL = "http://openweathermap.org/img/w/" + resp.weather[0].icon + ".png";
         
         var ad = resp.weather[0].main;
+        var temp = resp.main.temp - 273.15;
+        
+        
+        var temp1=temp.toString().substr(0,2);
+        
        
         $("#weatherImg").attr("src", imgURL);
-        $("#weatherDiv").append("<p>" + (resp.main.temp- 273.15) + " ℃ <p>");
+        $("#weatherDiv").append("<p>" + resp.name + "<p>");
+        $("#weatherDiv").append("<p>" + temp1 + " ℃ <p>");
         $("#weatherDiv").append("<p style='color:66A6FF;'>" + weatherCases(ad) + "<p>");
         
         
     }
 })
+
+// 좋아요 클릭 시 
+function fnLikeBtn(num) {
+	var storyNum = num;
+	
+	if($("#story" +storyNum).val() == 0)
+	{
+		$("#story"+storyNum).val(1);
+		$("#storyI"+storyNum).css("color","red");
+		
+		$.ajax({
+			url : "/likeCk.do",
+			dataType : "JSON",
+			type : "POST",
+			data : {
+						"storyNum" : storyNum,						
+			},
+			success : function(data, textStatus, jqXHR) 
+			{
+				if(data.result == "0")
+				{
+					alert("실패");			
+				}
+				else
+				{
+					console.log("성공");
+				}
+			},
+			error : function() 
+			{
+				alert("오류");
+			}			
+		})
+		
+	}
+	else if($("#story" +storyNum).val() == 1)
+	{
+		$("#story"+storyNum).val(0);
+		$("#storyI"+storyNum).css("color","white");
+		
+		$.ajax({
+			url : "/likeCkDel.do",
+			dataType : "JSON",
+			type : "POST",
+			data : {
+						"storyNum" : storyNum,						
+			},
+			success : function(data, textStatus, jqXHR) 
+			{
+				if(data.result == "0")
+				{
+					alert("실패");
+				}
+				else
+				{
+					
+				}
+			},
+			error : function() 
+			{
+				alert("오류");
+			}			
+		})
+		
+	}
+
+		
+		
+	
+	
+}
 
 

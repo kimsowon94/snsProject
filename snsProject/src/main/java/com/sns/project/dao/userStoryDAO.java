@@ -17,5 +17,11 @@ public interface userStoryDAO {
 	
 	// follow story출력
 	public List<userStoryVO> followStory(String userNum)throws Exception;
+	
+	// 좋아요
+	public int likeCk(userStoryVO storyVo)throws Exception;
+	
+	// 좋아요 취소
+	public int likeCkDel(userStoryVO storyVo)throws Exception;
 
 }

@@ -34,5 +34,15 @@ public class userStoryServiceImpl implements userStoryService {
 	public List<userStoryVO> followStory(String userNum) throws Exception {
 		return storyDao.followStory(userNum);
 	}
+
+	@Override
+	public int likeCk(userStoryVO storyVo) throws Exception {
+		return storyDao.likeCk(storyVo);
+	}
+
+	@Override
+	public int likeCkDel(userStoryVO storyVo) throws Exception {
+		return storyDao.likeCkDel(storyVo);
+	}
 	
 }

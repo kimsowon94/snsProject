@@ -35,4 +35,14 @@ public class userStoryDAOImpl implements userStoryDAO{
 		return sqlsession.selectList("userStoryDAO.followStory", userNum);
 	}
 
+	@Override
+	public int likeCk(userStoryVO storyVo) throws Exception {
+		return sqlsession.insert("userStoryDAO.likeCk", storyVo);
+	}
+
+	@Override
+	public int likeCkDel(userStoryVO storyVo) throws Exception {
+		return sqlsession.update("userStoryDAO.likeCkDel", storyVo);
+	}
+
 }

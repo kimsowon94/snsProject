@@ -82,3 +82,11 @@ $(document).ready(function() {
 		}
 	})
 })
+
+// 좋아요
+//$(document).ready(function() {
+//	if($(".storyValNum").val()==1)
+//	{
+//		$(".storyLikeI"
+//	}
+//})

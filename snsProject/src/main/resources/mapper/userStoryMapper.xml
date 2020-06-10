@@ -18,6 +18,8 @@
 		<result property="createTime" column="CREATE_TIME"/>
 		<result property="modifiedTime" column="MODIFIED_TIME"/>
 		<result property="userPhoto" column="USER_PHOTO"/>
+		<result property="likeCheck" column="LIKE_CHECK"/>
+		<result property="likeNum" column="LIKE_NUM"/>
 	</resultMap>
 	
 	<insert id="userStoryInsert">
@@ -69,4 +71,18 @@
 			AND A.USER_NUM = #{userNum}
 		ORDER BY STORY_NUM DESC
 	</select>
+	
+	<insert id="likeCk">
+		<selectKey keyProperty="likeNum" resultType="String" order="BEFORE">
+			SELECT NVL(MAX(LIKE_NUM),0)+1 AS "LIKE_NUM" FROM SNS_LIKE
+		</selectKey>
+			INSERT INTO SNS_LIKE(LIKE_NUM, STORY_NUM, USER_EMAIL, LIKE_CHECK)
+			VALUES(#{likeNum}, #{storyNum}, #{userEmail}, 1)
+	</insert>
+	
+	<delete id="likeCkDel">
+		DELETE 
+		FROM SNS_LIKE
+		WHERE USER_EMAIL = #{userEmail} AND STORY_NUM = #{storyNum}
+	</delete>
 </mapper>

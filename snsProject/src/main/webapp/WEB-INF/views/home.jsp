@@ -133,13 +133,15 @@ html, body, h1, h2, h3, h4, h5 {
 	<input type="hidden" id="fileCheck" name="fileCheck" value="N">
 	<input type="hidden" id="storyfileCheck" name="storyfileCheck" value="N">
 	
+	<input type="hidden" id="likeNum" name="likeNum">
+	
 	<!-- Navbar -->
 	<div class="w3-top">
 		<div class="w3-bar w3-theme-d2 w3-left-align w3-large">
 			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"	href="javascript:void(0);" onclick="openNav()">
 				<i class="fa fa-bars"></i>
 			</a> 
-			<a href="#"	class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+			<a href="#"	class="w3-bar-item w3-button w3-padding-large w3-theme-d4" onclick="javascript:location.href='mainSnsHome.do'">
 				<i class="fa fa-home w3-margin-right"></i>Logo
 			</a> 
 			<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"	title="News">
@@ -368,10 +370,14 @@ html, body, h1, h2, h3, h4, h5 {
 							</c:if>
 						</div>
 					</div>
-					<button type="button"
+					
+					<button type="button" onclick="fnLikeBtn(${a.storyNum})"
 						class="w3-button w3-theme-d1 w3-margin-bottom">
-						<i class="fa fa-thumbs-up"></i>  좋아요
+						<i class="fa fa-thumbs-up" id="storyI${a.storyNum }" class="storyLikeI"></i>  좋아요
 					</button>
+					
+					
+					<input type="hidden" id="story${a.storyNum }" name="story${a.storyNum }" class="storyValNum" value="0">
 					<button type="button"
 						class="w3-button w3-theme-d2 w3-margin-bottom">
 						<i class="fa fa-comment"></i> 댓글

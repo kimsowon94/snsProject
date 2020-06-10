@@ -135,5 +135,25 @@ public class userStoryVO {
 	}
 	
 	
+	private String likeNum;
+	private String likeCheck;
+
+
+
+
+
+	public String getLikeNum() {
+		return likeNum;
+	}
+	public void setLikeNum(String likeNum) {
+		this.likeNum = likeNum;
+	}
+	public String getLikeCheck() {
+		return likeCheck;
+	}
+	public void setLikeCheck(String likeCheck) {
+		this.likeCheck = likeCheck;
+	}
+	
 	
 }

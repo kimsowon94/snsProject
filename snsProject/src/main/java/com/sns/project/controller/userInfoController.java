@@ -343,6 +343,49 @@ public class userInfoController {
 		return "followHome";
 	}
 
+	
+	// 좋아요
+	@RequestMapping(value="/likeCk.do", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, String> likeCk(userStoryVO storyVo,HttpSession session) throws Exception
+	{
+		HashMap<String, String> result = new HashMap<String, String>();
+		storyVo.setUserEmail((String)session.getAttribute("userEmail"));
+		int count = storyService.likeCk(storyVo);
+		
+		String likeNum = storyVo.getLikeNum();
+		if(count == 0)
+		{
+			System.out.println("like insert실패");
+			result.put("result", "0");
+			
+		}else {
+			System.out.println("like insert완료");
+			result.put("result", likeNum);
+		}
+		return result;	
+	}
+	
+	// 좋아요 취소
+	@RequestMapping(value="/likeCkDel.do", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, String> likeCkDel(userStoryVO storyVo,HttpSession session) throws Exception
+	{
+		HashMap<String, String> result = new HashMap<String, String>();
+		storyVo.setUserEmail((String)session.getAttribute("userEmail"));
+		int count = storyService.likeCkDel(storyVo);
+		
+		if(count == 0)
+		{
+			System.out.println("like update실패");
+			result.put("result", "0");
+			
+		}else {
+			System.out.println("like update완료");
+			result.put("result", "1");
+		}
+		return result;	
+	}
 
 	
 
