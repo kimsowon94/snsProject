@@ -44,14 +44,15 @@
 	
 	<select id="userPostList" resultMap="userStoryVO"> 
 		SELECT A.USER_NUM "USER_NUM", A.USER_EMAIL "USER_EMAIL", A.USER_NAME "USER_NAME"
-			  ,A.USER_CAREER "USER_CAREER", A.USER_PHOTO "USER_PHOTO"
-			  ,B.STORY_NUM "STORY_NUM", B.STORY_CONTENT "STORY_CONTENT"
-			  ,B.STORY_DATE "STORY_DATE"
-			  ,B.STORY_PHOTO "STORY_PHOTO"
-		FROM SNS_USERINFO A, SNS_STORY B
-		WHERE A.USER_EMAIL = B.USER_EMAIL(+)
-			AND B.USER_EMAIL = #{userEmail}
-		ORDER BY STORY_NUM DESC
+	     			 ,A.USER_CAREER "USER_CAREER", A.USER_PHOTO "USER_PHOTO"
+	      			 ,B.STORY_NUM "STORY_NUM", B.STORY_CONTENT "STORY_CONTENT"
+	      		   	 ,B.STORY_DATE "STORY_DATE"
+	     			 ,B.STORY_PHOTO "STORY_PHOTO"
+	     			 ,c.LIKE_CHECK "LIKE_CHECK", C.LIKE_NUM "LIKE_NUM"
+			FROM SNS_USERINFO A, SNS_STORY B, SNS_LIKE C
+			WHERE A.USER_EMAIL = B.USER_EMAIL AND B.USER_EMAIL = C.USER_EMAIL
+	    			AND A.USER_EMAIL = #{userEmail} 
+			ORDER BY STORY_NUM DESC
 	</select>
 	
 	<delete id="delUserStory">
@@ -72,12 +73,18 @@
 		ORDER BY STORY_NUM DESC
 	</select>
 	
+	<select id="insertLike_check" resultType="String">
+		SELECT LIKE_NUM
+		FROM SNS_LIKE
+		WHERE STORY_NUM = #{storyNum} AND USER_EMAIL = #{userEmail}
+	</select>
+	
 	<insert id="likeCk">
 		<selectKey keyProperty="likeNum" resultType="String" order="BEFORE">
 			SELECT NVL(MAX(LIKE_NUM),0)+1 AS "LIKE_NUM" FROM SNS_LIKE
 		</selectKey>
 			INSERT INTO SNS_LIKE(LIKE_NUM, STORY_NUM, USER_EMAIL, LIKE_CHECK)
-			VALUES(#{likeNum}, #{storyNum}, #{userEmail}, 1)
+			VALUES(#{likeNum}, #{storyNum}, #{userEmail}, SYSDATE)
 	</insert>
 	
 	<delete id="likeCkDel">
@@ -85,4 +92,10 @@
 		FROM SNS_LIKE
 		WHERE USER_EMAIL = #{userEmail} AND STORY_NUM = #{storyNum}
 	</delete>
+	
+	<select id="like_css" resultMap="userStoryVO">
+		SELECT STORY_NUM
+		FROM SNS_LIKE
+		WHERE USER_EMAIL = #{userEmail}
+	</select>
 </mapper>

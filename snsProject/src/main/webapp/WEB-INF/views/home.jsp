@@ -133,7 +133,9 @@ html, body, h1, h2, h3, h4, h5 {
 	<input type="hidden" id="fileCheck" name="fileCheck" value="N">
 	<input type="hidden" id="storyfileCheck" name="storyfileCheck" value="N">
 	
-	<input type="hidden" id="likeNum" name="likeNum">
+	
+	
+	
 	
 	<!-- Navbar -->
 	<div class="w3-top">
@@ -376,8 +378,8 @@ html, body, h1, h2, h3, h4, h5 {
 						<i class="fa fa-thumbs-up" id="storyI${a.storyNum }" class="storyLikeI"></i>  좋아요
 					</button>
 					
+					<input type="hidden" id="story${a.storyNum }" name="story${a.storyNum }" class="storyValNum" value="0" >
 					
-					<input type="hidden" id="story${a.storyNum }" name="story${a.storyNum }" class="storyValNum" value="0">
 					<button type="button"
 						class="w3-button w3-theme-d2 w3-margin-bottom">
 						<i class="fa fa-comment"></i> 댓글

@@ -89,10 +89,13 @@ public class userInfoController {
 		List<userInfoVO> list = service.userProfile(userEmail);
 		List<userStoryVO> storyList = storyService.userPostList(userEmail);
 		List<userInfoVO> friendList = service.friendList(userEmail);
+//		List<userStoryVO> likeCss = storyService.like_css(userEmail);
+		
 		
 		model.addAttribute("friendList", friendList);
 		model.addAttribute("storyList", storyList);
 		model.addAttribute("list", list);
+//		model.addAttribute("likeCss", likeCss);
 		
 		return "home";	
 	}
@@ -351,18 +354,26 @@ public class userInfoController {
 	{
 		HashMap<String, String> result = new HashMap<String, String>();
 		storyVo.setUserEmail((String)session.getAttribute("userEmail"));
-		int count = storyService.likeCk(storyVo);
+		int count;
+		String like = storyService.insertLike_check(storyVo);
 		
-		String likeNum = storyVo.getLikeNum();
-		if(count == 0)
+		if(like == null)
 		{
-			System.out.println("like insert실패");
-			result.put("result", "0");
+			count = storyService.likeCk(storyVo);
 			
-		}else {
-			System.out.println("like insert완료");
-			result.put("result", likeNum);
-		}
+//			String likeNum = storyVo.getLikeNum();
+			if(count == 0)
+			{
+				System.out.println("like insert실패");
+				result.put("result", "0");
+				
+			}else {
+				System.out.println("like insert완료");
+//				result.put("result", likeNum);
+				result.put("result", "1");
+			}
+		}		
+	
 		return result;	
 	}
 	

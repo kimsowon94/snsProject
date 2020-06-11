@@ -337,10 +337,13 @@ html, body, h1, h2, h3, h4, h5 {
 							<img src="/w3images/nature.jpg" style="width: 100%" class="w3-margin-bottom">
 						</div> -->
 					</div>
-					<button type="button"
+					<button type="button" onclick="fnLikeBtn(${a.storyNum})"
 						class="w3-button w3-theme-d1 w3-margin-bottom">
-						<i class="fa fa-thumbs-up"></i>  좋아요
+						<i class="fa fa-thumbs-up" id="storyI${a.storyNum }" class="storyLikeI"></i>  좋아요
 					</button>
+					
+					
+					<input type="hidden" id="story${a.storyNum }" name="story${a.storyNum }" class="storyValNum" value="0">
 					<button type="button"
 						class="w3-button w3-theme-d2 w3-margin-bottom">
 						<i class="fa fa-comment"></i> 댓글

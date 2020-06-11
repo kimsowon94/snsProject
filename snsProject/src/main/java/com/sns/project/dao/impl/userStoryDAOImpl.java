@@ -45,4 +45,14 @@ public class userStoryDAOImpl implements userStoryDAO{
 		return sqlsession.update("userStoryDAO.likeCkDel", storyVo);
 	}
 
+	@Override
+	public String insertLike_check(userStoryVO storyVo) throws Exception {
+		return sqlsession.selectOne("userStoryDAO.insertLike_check", storyVo);
+	}
+
+	@Override
+	public List<userStoryVO> like_css(String userEmail) throws Exception {
+		return sqlsession.selectList("userStoryDAO.like_css", userEmail);
+	}
+
 }

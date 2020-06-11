@@ -622,6 +622,7 @@ function fnLikeBtn(num) {
 				}
 				else
 				{
+					$("#likeNum").val(data.result);
 					console.log("성공");
 				}
 			},

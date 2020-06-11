@@ -44,5 +44,15 @@ public class userStoryServiceImpl implements userStoryService {
 	public int likeCkDel(userStoryVO storyVo) throws Exception {
 		return storyDao.likeCkDel(storyVo);
 	}
+
+	@Override
+	public String insertLike_check(userStoryVO storyVo) throws Exception {
+		return storyDao.insertLike_check(storyVo);
+	}
+
+	@Override
+	public List<userStoryVO> like_css(String userEmail) throws Exception {
+		return storyDao.like_css(userEmail);
+	}
 	
 }

@@ -84,9 +84,9 @@ $(document).ready(function() {
 })
 
 // 좋아요
-//$(document).ready(function() {
-//	if($(".storyValNum").val()==1)
-//	{
-//		$(".storyLikeI"
-//	}
-//})
+$(document).ready(function() {
+	var arrNumber = new Array($("#likeCss").val()); //배열선언
+	
+	console.log(arrNumber);
+	
+})
