@@ -598,11 +598,13 @@ $.ajax({
     }
 })
 
+
 // 좋아요 클릭 시 
 function fnLikeBtn(num) {
 	var storyNum = num;
 	
-	if($("#story" +storyNum).val() == 0)
+	
+	if($("#story" +storyNum).val() != 1)
 	{
 		$("#story"+storyNum).val(1);
 		$("#storyI"+storyNum).css("color","red");
@@ -663,11 +665,6 @@ function fnLikeBtn(num) {
 		})
 		
 	}
-
-		
-		
-	
 	
 }
-
 

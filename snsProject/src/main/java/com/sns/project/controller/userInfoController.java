@@ -89,13 +89,13 @@ public class userInfoController {
 		List<userInfoVO> list = service.userProfile(userEmail);
 		List<userStoryVO> storyList = storyService.userPostList(userEmail);
 		List<userInfoVO> friendList = service.friendList(userEmail);
-//		List<userStoryVO> likeCss = storyService.like_css(userEmail);
+		List<userStoryVO> likeCss = storyService.like_css(userEmail);
 		
 		
 		model.addAttribute("friendList", friendList);
 		model.addAttribute("storyList", storyList);
 		model.addAttribute("list", list);
-//		model.addAttribute("likeCss", likeCss);
+		model.addAttribute("likeCss", likeCss);
 		
 		return "home";	
 	}
@@ -336,12 +336,13 @@ public class userInfoController {
 		
 		List<userInfoVO> list = service.follow_user(userNum);
 		List<userStoryVO> storyList = storyService.followStory(userNum);
-		
 		List<userInfoVO> profile = service.userProfile((String) session.getAttribute("userEmail"));
+		List<userStoryVO> likeCss = storyService.like_css((String) session.getAttribute("userEmail"));
 		
 		model.addAttribute("list",list);
 		model.addAttribute("storyList", storyList);
 		model.addAttribute("profile", profile);
+		model.addAttribute("likeCss", likeCss);
 		
 		return "followHome";
 	}

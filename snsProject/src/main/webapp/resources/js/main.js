@@ -82,11 +82,3 @@ $(document).ready(function() {
 		}
 	})
 })
-
-// 좋아요
-$(document).ready(function() {
-	var arrNumber = new Array($("#likeCss").val()); //배열선언
-	
-	console.log(arrNumber);
-	
-})

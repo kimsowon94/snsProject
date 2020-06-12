@@ -124,7 +124,22 @@ html, body, h1, h2, h3, h4, h5 {
 #myTable tr.header, #myTable tr:hover {
   background-color: #f1f1f1;
 }
+
+
+
+
+
+
+
+.toggled1{
+     color: red;
+}
+.toggled2{
+     color: white;
+}
 </style>
+
+
 
 <body class="w3-theme-l5">
 <form class="main" enctype="multipart/form-data">
@@ -133,7 +148,7 @@ html, body, h1, h2, h3, h4, h5 {
 	<input type="hidden" id="fileCheck" name="fileCheck" value="N">
 	<input type="hidden" id="storyfileCheck" name="storyfileCheck" value="N">
 	
-	
+
 	
 	
 	
@@ -373,12 +388,30 @@ html, body, h1, h2, h3, h4, h5 {
 						</div>
 					</div>
 					
-					<button type="button" onclick="fnLikeBtn(${a.storyNum})"
-						class="w3-button w3-theme-d1 w3-margin-bottom">
-						<i class="fa fa-thumbs-up" id="storyI${a.storyNum }" class="storyLikeI"></i>  좋아요
-					</button>
+							<button type="button" onclick="fnLikeBtn(${a.storyNum})" class="w3-button w3-theme-d1 w3-margin-bottom">
+								
+								<i class="fa fa-thumbs-up" id="storyI${a.storyNum }" class="storyLikeI" 
+								
+									<c:forEach items="${likeCss }" var="t">
+										<c:if test="${t.storyNum == a.storyNum}">
+											style="color:red;"
+										</c:if>
+									</c:forEach>
+									>
+								</i>  좋아요
+									
+							</button>
+
 					
-					<input type="hidden" id="story${a.storyNum }" name="story${a.storyNum }" class="storyValNum" value="0" >
+					<input type="hidden" id="story${a.storyNum }" name="story${a.storyNum }" class="storyValNum" 
+						<c:forEach items="${likeCss }" var="t">
+							<c:if test="${t.storyNum == a.storyNum}">
+								value="1"
+							</c:if>
+						
+						</c:forEach> 
+							>
+					
 					
 					<button type="button"
 						class="w3-button w3-theme-d2 w3-margin-bottom">
