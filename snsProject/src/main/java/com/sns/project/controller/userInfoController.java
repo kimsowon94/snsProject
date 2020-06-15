@@ -90,12 +90,14 @@ public class userInfoController {
 		List<userStoryVO> storyList = storyService.userPostList(userEmail);
 		List<userInfoVO> friendList = service.friendList(userEmail);
 		List<userStoryVO> likeCss = storyService.like_css(userEmail);
+		List<userStoryVO> likeCount = storyService.like_count();
 		
 		
 		model.addAttribute("friendList", friendList);
 		model.addAttribute("storyList", storyList);
 		model.addAttribute("list", list);
 		model.addAttribute("likeCss", likeCss);
+		model.addAttribute("likeCnt", likeCount);
 		
 		return "home";	
 	}
@@ -338,11 +340,13 @@ public class userInfoController {
 		List<userStoryVO> storyList = storyService.followStory(userNum);
 		List<userInfoVO> profile = service.userProfile((String) session.getAttribute("userEmail"));
 		List<userStoryVO> likeCss = storyService.like_css((String) session.getAttribute("userEmail"));
+		List<userStoryVO> likeCount = storyService.like_count();
 		
 		model.addAttribute("list",list);
 		model.addAttribute("storyList", storyList);
 		model.addAttribute("profile", profile);
 		model.addAttribute("likeCss", likeCss);
+		model.addAttribute("likeCnt", likeCount);
 		
 		return "followHome";
 	}
@@ -351,16 +355,18 @@ public class userInfoController {
 	// 좋아요
 	@RequestMapping(value="/likeCk.do", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, String> likeCk(userStoryVO storyVo,HttpSession session) throws Exception
+	public HashMap<String, String> likeCk(userStoryVO storyVo,HttpSession session, String storyNum) throws Exception
 	{
 		HashMap<String, String> result = new HashMap<String, String>();
 		storyVo.setUserEmail((String)session.getAttribute("userEmail"));
 		int count;
 		String like = storyService.insertLike_check(storyVo);
 		
+		
 		if(like == null)
 		{
 			count = storyService.likeCk(storyVo);
+			String likeCount = storyService.like_count2(storyNum);
 			
 //			String likeNum = storyVo.getLikeNum();
 			if(count == 0)
@@ -370,8 +376,8 @@ public class userInfoController {
 				
 			}else {
 				System.out.println("like insert완료");
-//				result.put("result", likeNum);
-				result.put("result", "1");
+				result.put("result", likeCount);
+				System.out.println("likeCount---------------" + likeCount);
 			}
 		}		
 	
@@ -381,11 +387,12 @@ public class userInfoController {
 	// 좋아요 취소
 	@RequestMapping(value="/likeCkDel.do", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, String> likeCkDel(userStoryVO storyVo,HttpSession session) throws Exception
+	public HashMap<String, String> likeCkDel(userStoryVO storyVo,HttpSession session, String storyNum) throws Exception
 	{
 		HashMap<String, String> result = new HashMap<String, String>();
 		storyVo.setUserEmail((String)session.getAttribute("userEmail"));
 		int count = storyService.likeCkDel(storyVo);
+		String likeCount = storyService.like_count2(storyNum);
 		
 		if(count == 0)
 		{
@@ -394,7 +401,8 @@ public class userInfoController {
 			
 		}else {
 			System.out.println("like update완료");
-			result.put("result", "1");
+			result.put("result", likeCount);
+			System.out.println("likeCount2---------------" + likeCount);
 		}
 		return result;	
 	}

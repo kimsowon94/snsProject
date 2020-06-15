@@ -567,7 +567,7 @@ $.ajax({
     type: "GET",
     async: "false",
     success: function(resp) {
-        console.log(resp);
+        /*console.log(resp);
         console.log("현재온도 : "+ (resp.main.temp - 273.15) );
         console.log("현재습도 : "+ resp.main.humidity);
         console.log("날씨 : "+ resp.weather[0].main );
@@ -576,7 +576,7 @@ $.ajax({
         console.log("바람   : "+ resp.wind.speed );
         console.log("나라   : "+ resp.sys.country );
         console.log("도시이름  : "+ resp.name );
-        console.log("구름  : "+ (resp.clouds.all) +"%" ); 
+        console.log("구름  : "+ (resp.clouds.all) +"%" ); */
         
         
         
@@ -608,7 +608,6 @@ function fnLikeBtn(num) {
 	{
 		$("#story"+storyNum).val(1);
 		$("#storyI"+storyNum).css("color","red");
-		
 		$.ajax({
 			url : "/likeCk.do",
 			dataType : "JSON",
@@ -624,7 +623,14 @@ function fnLikeBtn(num) {
 				}
 				else
 				{
-					$("#likeNum").val(data.result);
+					if(data.result == null)
+					{
+						$("#likeCnt" +storyNum).text("");
+					}
+					else
+					{
+						$("#likeCnt" +storyNum).text("좋아요 " + data.result + " 개");
+					}
 					console.log("성공");
 				}
 			},
@@ -655,6 +661,15 @@ function fnLikeBtn(num) {
 				}
 				else
 				{
+					console.log("성공");
+					if(data.result == null)
+					{
+						$("#likeCnt" +storyNum).text("");
+					}
+					else
+					{
+						$("#likeCnt" +storyNum).text("좋아요 " + data.result + " 개");
+					}
 					
 				}
 			},

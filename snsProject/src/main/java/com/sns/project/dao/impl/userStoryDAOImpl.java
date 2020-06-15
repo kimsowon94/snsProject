@@ -55,4 +55,14 @@ public class userStoryDAOImpl implements userStoryDAO{
 		return sqlsession.selectList("userStoryDAO.like_css", userEmail);
 	}
 
+	@Override
+	public List<userStoryVO> like_count() throws Exception {
+		return sqlsession.selectList("userStoryDAO.like_count");
+	}
+
+	@Override
+	public String like_count2(String storyNum) throws Exception {
+		return sqlsession.selectOne("userStoryDAO.like_count2", storyNum);
+	}
+
 }

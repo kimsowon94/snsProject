@@ -28,4 +28,10 @@ public interface userStoryService {
 	
 	// 좋아요 유지
 	public List<userStoryVO> like_css(String userEmail)throws Exception;
+	
+	// 좋아요 갯수
+	public List<userStoryVO> like_count()throws Exception;
+	
+	// 좋아요 갯수2
+	public String like_count2(String storyNum)throws Exception;
 }

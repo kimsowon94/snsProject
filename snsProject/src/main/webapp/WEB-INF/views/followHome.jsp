@@ -335,6 +335,17 @@ html, body, h1, h2, h3, h4, h5 {
 						</div>
 						
 					</div>
+					<br>
+						<div>
+							<span style="font-weight: bold;" id="likeCnt${a.storyNum}">
+								<c:forEach var="w" items="${likeCnt }">
+								<c:if test="${w.storyNum == a.storyNum}">
+								좋아요 ${w.likeCount } 개
+								</c:if>
+								</c:forEach>
+							</span>
+						</div>
+					<br>
 					<button type="button" onclick="fnLikeBtn(${a.storyNum})"
 						class="w3-button w3-theme-d1 w3-margin-bottom">
 						<i class="fa fa-thumbs-up" id="storyI${a.storyNum }" class="storyLikeI" 
@@ -346,6 +357,8 @@ html, body, h1, h2, h3, h4, h5 {
 									</c:forEach>
 									>
 								</i>  좋아요
+								
+		
 					</button>
 					
 					

@@ -54,5 +54,15 @@ public class userStoryServiceImpl implements userStoryService {
 	public List<userStoryVO> like_css(String userEmail) throws Exception {
 		return storyDao.like_css(userEmail);
 	}
+
+	@Override
+	public List<userStoryVO> like_count() throws Exception {
+		return storyDao.like_count();
+	}
+
+	@Override
+	public String like_count2(String storyNum) throws Exception {
+		return storyDao.like_count2(storyNum);
+	}
 	
 }

@@ -156,4 +156,20 @@ public class userStoryVO {
 	}
 	
 	
+	private int likeCount;
+
+
+
+
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+	
+	
+	
+	
 }
