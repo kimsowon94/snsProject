@@ -111,4 +111,10 @@
 		WHERE STORY_NUM = #{storyNum}
 		GROUP BY STORY_NUM
 	</select>
+	
+	<select id="like_friend" resultMap="userStoryVO">		
+		SELECT A.USER_NAME "USER_NAME" ,B.USER_EMAIL "USER_EMAIL", A.USER_PHOTO "USER_PHOTO"
+		FROM SNS_USERINFO A, SNS_LIKE B
+		WHERE A.USER_EMAIL = B.USER_EMAIL(+) AND STORY_NUM = #{storyNum}
+	</select>
 </mapper>

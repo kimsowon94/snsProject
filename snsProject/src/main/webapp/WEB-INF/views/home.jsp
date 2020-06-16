@@ -22,6 +22,8 @@
 <!-- 카메라 아이콘, 엑스 아이콘 쓰기 위해.. -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+
+
 <style>
 html, body, h1, h2, h3, h4, h5 {
 	font-family: "Open Sans", sans-serif
@@ -140,6 +142,89 @@ html, body, h1, h2, h3, h4, h5 {
 }
 </style>
 
+<style>
+<!-- 좋아요 모달 -->
+/* The Modal (background) */
+.modal1 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content1 {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close1 {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close1:hover,
+.close1:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal1 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content1 {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close1 {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close1:hover,
+.close1:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
 
 
 <body class="w3-theme-l5">
@@ -390,15 +475,14 @@ html, body, h1, h2, h3, h4, h5 {
 					</div>
 					<br>
 						<div>
-							<span style="font-weight: bold;" id="likeCnt${a.storyNum}">
-							
+							<span style="font-weight: bold; cursor: pointer;" id="likeCnt${a.storyNum}" onclick="like_btn(${a.storyNum})">
+
 								<c:forEach var="w" items="${likeCnt }">
 									<c:if test="${w.storyNum == a.storyNum}">
 								좋아요 ${w.likeCount } 개
 								</c:if>
-							
 								</c:forEach>
-							
+
 							</span>
 						</div>
 					<br>
@@ -551,6 +635,32 @@ html, body, h1, h2, h3, h4, h5 {
 		</div>
 	</div>
 
+
+	<!-- The Modal -->
+	<div id="myModal1" class="modal1">
+
+		<!-- Modal content -->
+		<div class="modal-content1">
+			<span class="close1">&times;</span>
+			<table id="myTable likeFriend">
+				<tr class="header">
+					<th style="width: 60%;">좋아요 한 친구</th>
+					<th style="width: 60%;"></th>
+				</tr>
+				
+				<tr style="cursor: pointer;" >
+					<td></td>
+					<td></td>
+				</tr>
+				
+			</table>
+		</div>
+
+	</div>
+
+
+
+
 	<!--  모달 -->
 <script type="text/javascript">
 //Get the modal
@@ -559,8 +669,10 @@ var modal = document.getElementById("myModal");
 //Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 
+
 //Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
+
 
 //When the user clicks the button, open the modal 
 btn.onclick = function() {
@@ -578,6 +690,7 @@ if (event.target == modal) {
  modal.style.display = "none";
 }
 }
+
 </script>
 
 

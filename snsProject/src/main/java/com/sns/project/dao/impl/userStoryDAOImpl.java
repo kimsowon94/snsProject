@@ -65,4 +65,9 @@ public class userStoryDAOImpl implements userStoryDAO{
 		return sqlsession.selectOne("userStoryDAO.like_count2", storyNum);
 	}
 
+	@Override
+	public List<userStoryVO> like_friend(String storyNum) throws Exception {
+		return sqlsession.selectList("userStoryDAO.like_friend", storyNum);
+	}
+
 }

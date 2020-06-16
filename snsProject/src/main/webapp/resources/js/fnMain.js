@@ -506,27 +506,6 @@ function fnUserPw_re() {
 	}
 }
 
-/*function fnFri_prof(num) {
-	var userNum = num;
-	
-	$.ajax({
-		url : "/follow_user.do",
-		dataType : "HTML",
-		type : "POST",
-		data : {
-					"userNum" : userNum,
-		},
-		success : function(data, textStatus, jqXHR) 
-		{
-			location.href = "followHome.do";
-		},
-		error : function() 
-		{
-			alert("오류");
-		}			
-	})
-	
-}*/
 
 
 
@@ -683,3 +662,49 @@ function fnLikeBtn(num) {
 	
 }
 
+
+function like_btn(num) {
+	var storyNum = num
+
+	$(document).ready(function() {
+		$("#myModal1").show();
+		
+		$(".close1").click(function() {
+			$("#myModal1").css("display","none");
+		})
+	})
+	
+	$.ajax({
+			url : "/like_friend.do",
+			dataType : "JSON",
+			type : "POST",
+			data : {
+						"storyNum" : storyNum,						
+			},
+			success : function(data, textStatus, jqXHR) 
+			{
+				alert("성공");
+				var results = data.result;
+				
+			     for(var i=0 ;i<results.length ;i++){                            
+                     alert(results[i].userName);    
+                       }   
+
+	            /*var str = '<tr>';
+	            $.each(results , function(i){
+	                str += '<td>' + results[i].userName + '</td><td>' + results[i].userEmail + '</td><td>' + results[i].userPhoto + '</td>';
+	                str += '</tr>';
+	               
+	           });
+	            $("#likeFriend").append(str);*/
+	
+			},
+			error : function() 
+			{
+				alert("오류");
+			}			
+		})
+
+
+ 
+}

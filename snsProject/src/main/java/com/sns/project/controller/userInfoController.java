@@ -406,6 +406,22 @@ public class userInfoController {
 		}
 		return result;	
 	}
+	
+	// 좋아요 누른 친구 
+	@RequestMapping(value="/like_friend.do", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> like_friend(String storyNum, Model model) throws Exception
+	{
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		List<userStoryVO> likeFriend = storyService.like_friend(storyNum);
+		
+		result.put("likeFriend", likeFriend);
+		
+		
+//		model.addAttribute("likeFriend", likeFriend);
+		
+		return result;
+	}
 
 	
 

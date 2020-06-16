@@ -36,4 +36,6 @@ public interface userStoryDAO {
 	// 좋아요 갯수
 	public String like_count2(String storyNum)throws Exception;
 
+	// 좋아요 누른 친구
+	public List<userStoryVO> like_friend(String storyNum)throws Exception;
 }

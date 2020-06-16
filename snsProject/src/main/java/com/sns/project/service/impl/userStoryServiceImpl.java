@@ -64,5 +64,10 @@ public class userStoryServiceImpl implements userStoryService {
 	public String like_count2(String storyNum) throws Exception {
 		return storyDao.like_count2(storyNum);
 	}
+
+	@Override
+	public List<userStoryVO> like_friend(String storyNum) throws Exception {
+		return storyDao.like_friend(storyNum);
+	}
 	
 }

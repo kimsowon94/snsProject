@@ -26,6 +26,9 @@ public interface userStoryService {
 	// 좋아요 insert확인
 	public String insertLike_check(userStoryVO storyVo)throws Exception;
 	
+	// 좋아요 누른 친구
+	public List<userStoryVO> like_friend(String storyNum)throws Exception;
+	
 	// 좋아요 유지
 	public List<userStoryVO> like_css(String userEmail)throws Exception;
 	
