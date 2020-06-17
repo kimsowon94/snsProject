@@ -176,7 +176,7 @@ public class userInfoController {
 	public HashMap<String, String> delUserStory(userStoryVO storyVo) throws Exception
 	{
 		HashMap<String, String> result = new HashMap<String, String>();
-		
+		storyService.like_child(storyVo);
 		int num = storyService.delUserStory(storyVo);
 		if(num == 1)
 		{
@@ -409,18 +409,14 @@ public class userInfoController {
 	
 	// 좋아요 누른 친구 
 	@RequestMapping(value="/like_friend.do", method = RequestMethod.POST)
-	@ResponseBody
-	public HashMap<String, Object> like_friend(String storyNum, Model model) throws Exception
+	public String like_friend(String storyNum, Model model) throws Exception
 	{
-		HashMap<String, Object> result = new HashMap<String, Object>();
+		
 		List<userStoryVO> likeFriend = storyService.like_friend(storyNum);
 		
-		result.put("likeFriend", likeFriend);
+		model.addAttribute("likeFriend", likeFriend);
 		
-		
-//		model.addAttribute("likeFriend", likeFriend);
-		
-		return result;
+		return "likeFriendList";
 	}
 
 	

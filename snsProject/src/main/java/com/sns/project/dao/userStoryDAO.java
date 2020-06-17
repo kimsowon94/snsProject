@@ -38,4 +38,7 @@ public interface userStoryDAO {
 
 	// 좋아요 누른 친구
 	public List<userStoryVO> like_friend(String storyNum)throws Exception;
+	
+	// 게시물삭제 시 좋아요 child삭제
+	public int like_child(userStoryVO storyVo)throws Exception;
 }

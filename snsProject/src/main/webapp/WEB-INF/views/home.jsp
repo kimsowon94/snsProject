@@ -143,47 +143,6 @@ html, body, h1, h2, h3, h4, h5 {
 </style>
 
 <style>
-<!-- 좋아요 모달 -->
-/* The Modal (background) */
-.modal1 {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content1 {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* The Close Button */
-.close1 {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close1:hover,
-.close1:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-</style>
-<style>
 body {font-family: Arial, Helvetica, sans-serif;}
 
 /* The Modal (background) */
@@ -514,13 +473,16 @@ body {font-family: Arial, Helvetica, sans-serif;}
 					
 					
 					<button type="button"
-						class="w3-button w3-theme-d2 w3-margin-bottom">
+						class="w3-button w3-theme-d2 w3-margin-bottom" onclick="comClick(${a.storyNum })">
 						<i class="fa fa-comment"></i> 댓글
 					</button>
 					<!-- 게시글 삭제하기 -->
 					<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="if(confirm('해당 게시글을 삭제하시겠습니까?')){fnDelStory(${a.storyNum});}">
 						<i class="fa fa-trash-o"></i>  삭제
 					</button>
+					<p contenteditable="true" class="w3-border w3-padding" id="comment${a.storyNum }" style="display: none;"></p>
+					<button type="button"class="w3-button w3-theme-d2 w3-margin-bottom" style="display: none; margin: 0;float: left; margin-right: 5px;" id="register${a.storyNum }">등록</button>
+					<button type="button"class="w3-button w3-theme-d2 w3-margin-bottom" style="display: none; background-color: red;" id="revocation${a.storyNum }">취소</button>
 				</div>
 				</c:forEach>
 			</div>
@@ -640,9 +602,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
 	<div id="myModal1" class="modal1">
 
 		<!-- Modal content -->
-		<div class="modal-content1">
+		<div class="modal-content1" style="width: 37%;">
 			<span class="close1">&times;</span>
-			<table id="myTable likeFriend">
+			<div id="result_div">
+			<!-- <table id="myTable likeFriend">
 				<tr class="header">
 					<th style="width: 60%;">좋아요 한 친구</th>
 					<th style="width: 60%;"></th>
@@ -652,8 +615,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 					<td></td>
 					<td></td>
 				</tr>
-				
-			</table>
+			
+			</table> -->
+			</div>
 		</div>
 
 	</div>

@@ -85,8 +85,5 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-	$('#testBtn').click(function(e){
-		e.preventDefault();
-		$('#testModal').modal("show");
-	});
+
 })

@@ -37,4 +37,8 @@ public interface userStoryService {
 	
 	// 좋아요 갯수2
 	public String like_count2(String storyNum)throws Exception;
+	
+	// 게시물삭제 시 좋아요 child삭제
+	public int like_child(userStoryVO storyVo)throws Exception;
+
 }

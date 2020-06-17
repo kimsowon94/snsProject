@@ -665,10 +665,8 @@ function fnLikeBtn(num) {
 
 function like_btn(num) {
 	var storyNum = num
-
 	$(document).ready(function() {
 		$("#myModal1").show();
-		
 		$(".close1").click(function() {
 			$("#myModal1").css("display","none");
 		})
@@ -676,28 +674,14 @@ function like_btn(num) {
 	
 	$.ajax({
 			url : "/like_friend.do",
-			dataType : "JSON",
+			dataType : "HTML",
 			type : "POST",
 			data : {
 						"storyNum" : storyNum,						
 			},
 			success : function(data, textStatus, jqXHR) 
 			{
-				alert("성공");
-				var results = data.result;
-				
-			     for(var i=0 ;i<results.length ;i++){                            
-                     alert(results[i].userName);    
-                       }   
-
-	            /*var str = '<tr>';
-	            $.each(results , function(i){
-	                str += '<td>' + results[i].userName + '</td><td>' + results[i].userEmail + '</td><td>' + results[i].userPhoto + '</td>';
-	                str += '</tr>';
-	               
-	           });
-	            $("#likeFriend").append(str);*/
-	
+				$("#result_div").html(data);	
 			},
 			error : function() 
 			{
@@ -705,6 +689,47 @@ function like_btn(num) {
 			}			
 		})
 
-
- 
 }
+
+function like_btn2(num) {
+	var storyNum = num
+	$(document).ready(function() {
+		$("#myModal2").show();
+		$(".close2").click(function() {
+			$("#myModal2").css("display","none");
+		})
+	})
+	
+	$.ajax({
+			url : "/like_friend.do",
+			dataType : "HTML",
+			type : "POST",
+			data : {
+						"storyNum" : storyNum,						
+			},
+			success : function(data, textStatus, jqXHR) 
+			{
+				$("#result_div2").html(data);	
+			},
+			error : function() 
+			{
+				alert("오류");
+			}			
+		})
+}
+
+function comClick(num) {
+	var storyNum = num;
+	$("#comment"+storyNum).css("display","block");	
+	$("#register" +storyNum).css("display","block");
+    $("#revocation"+storyNum).css("display","block");	
+    
+    $(document).ready(function() {
+    	$("#revocation"+storyNum).click(function() {
+			$("#comment"+storyNum).css("display","none");	
+			$("#register" +storyNum).css("display","none");
+			$("#revocation"+storyNum).css("display","none");
+		})
+	})
+}
+

@@ -117,4 +117,10 @@
 		FROM SNS_USERINFO A, SNS_LIKE B
 		WHERE A.USER_EMAIL = B.USER_EMAIL(+) AND STORY_NUM = #{storyNum}
 	</select>
+	
+	<delete id="like_child">
+		DELETE SNS_LIKE
+		WHERE USER_EMAIL = #{userEmail}
+     	AND STORY_NUM = #{storyNum}
+	</delete>
 </mapper>

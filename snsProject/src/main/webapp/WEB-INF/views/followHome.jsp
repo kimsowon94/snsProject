@@ -124,6 +124,49 @@ html, body, h1, h2, h3, h4, h5 {
 }
 </style>
 
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal2 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content2 {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close2 {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close2:hover,
+.close2:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+
 
 <body class="w3-theme-l5">
 <form class="main" enctype="multipart/form-data">
@@ -337,7 +380,7 @@ html, body, h1, h2, h3, h4, h5 {
 					</div>
 					<br>
 						<div>
-							<span style="font-weight: bold;" id="likeCnt${a.storyNum}">
+							<span style="font-weight: bold; cursor: pointer;" id="likeCnt${a.storyNum}" onclick="like_btn2(${a.storyNum})">
 								<c:forEach var="w" items="${likeCnt }">
 								<c:if test="${w.storyNum == a.storyNum}">
 								좋아요 ${w.likeCount } 개
@@ -495,6 +538,30 @@ html, body, h1, h2, h3, h4, h5 {
 			</table>
 
 		</div>
+	</div>
+	
+		<!-- The Modal -->
+	<div id="myModal2" class="modal2">
+
+		<!-- Modal content -->
+		<div class="modal-content2" style="width: 37%;">
+			<span class="close2">&times;</span>
+			<div id="result_div2">
+			<!-- <table id="myTable likeFriend">
+				<tr class="header">
+					<th style="width: 60%;">좋아요 한 친구</th>
+					<th style="width: 60%;"></th>
+				</tr>
+				
+				<tr style="cursor: pointer;" >
+					<td></td>
+					<td></td>
+				</tr>
+			
+			</table> -->
+			</div>
+		</div>
+
 	</div>
 
 	<!--  모달 -->

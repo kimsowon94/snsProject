@@ -70,4 +70,9 @@ public class userStoryDAOImpl implements userStoryDAO{
 		return sqlsession.selectList("userStoryDAO.like_friend", storyNum);
 	}
 
+	@Override
+	public int like_child(userStoryVO storyVo) throws Exception {
+		return sqlsession.delete("userStoryDAO.like_child", storyVo);
+	}
+
 }
