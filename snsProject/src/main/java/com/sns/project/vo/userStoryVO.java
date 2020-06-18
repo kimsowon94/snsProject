@@ -170,6 +170,42 @@ public class userStoryVO {
 	}
 	
 	
+	private String friendNum;
+	private String friendRe;
+	private String friendSe;
+	private String friendDate;
+
+
+
+
+
+	public String getFriendNum() {
+		return friendNum;
+	}
+	public void setFriendNum(String friendNum) {
+		this.friendNum = friendNum;
+	}
+	public String getFriendRe() {
+		return friendRe;
+	}
+	public void setFriendRe(String friendRe) {
+		this.friendRe = friendRe;
+	}
+	public String getFriendSe() {
+		return friendSe;
+	}
+	public void setFriendSe(String friendSe) {
+		this.friendSe = friendSe;
+	}
+	public String getFriendDate() {
+		return friendDate;
+	}
+	public void setFriendDate(String friendDate) {
+		this.friendDate = friendDate;
+	}
+	
+	
+	
 	
 	
 }

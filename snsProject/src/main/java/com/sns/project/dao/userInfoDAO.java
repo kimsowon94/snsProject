@@ -35,4 +35,7 @@ public interface userInfoDAO {
 	
 	// 친구 sns화면 출력
 	public List<userInfoVO> follow_user(String userNum) throws Exception;
+	
+	// follow한 친구목록 뽑기 
+	public List<userInfoVO> friendList_follow(String userNum) throws Exception;
 }

@@ -93,9 +93,10 @@ public class userInfoController {
 		List<userStoryVO> likeCount = storyService.like_count();
 		
 		
-		model.addAttribute("friendList", friendList);
+		
 		model.addAttribute("storyList", storyList);
 		model.addAttribute("list", list);
+		model.addAttribute("friendList", friendList);
 		model.addAttribute("likeCss", likeCss);
 		model.addAttribute("likeCnt", likeCount);
 		
@@ -341,12 +342,14 @@ public class userInfoController {
 		List<userInfoVO> profile = service.userProfile((String) session.getAttribute("userEmail"));
 		List<userStoryVO> likeCss = storyService.like_css((String) session.getAttribute("userEmail"));
 		List<userStoryVO> likeCount = storyService.like_count();
+		List<userInfoVO> friendList = service.friendList_follow(userNum);
 		
 		model.addAttribute("list",list);
 		model.addAttribute("storyList", storyList);
 		model.addAttribute("profile", profile);
 		model.addAttribute("likeCss", likeCss);
 		model.addAttribute("likeCnt", likeCount);
+		model.addAttribute("friendList", friendList);
 		
 		return "followHome";
 	}
@@ -418,6 +421,27 @@ public class userInfoController {
 		
 		return "likeFriendList";
 	}
+	
+	// follow하는 전체 story
+	@RequestMapping(value="/fullUserStory.do", method = RequestMethod.GET)
+	public String fullUserStory(HttpSession session,Model model) throws Exception
+	{
+		String userEmail = (String) session.getAttribute("userEmail");
+		List<userInfoVO> list = service.userProfile(userEmail);
+		List<userStoryVO> fullList = storyService.fullUserStory(userEmail);
+		List<userInfoVO> friendList = service.friendList(userEmail);
+		List<userStoryVO> likeCss = storyService.like_css(userEmail);
+		List<userStoryVO> likeCount = storyService.like_count();
+		
+		model.addAttribute("list", list);
+		model.addAttribute("fullList", fullList);
+		model.addAttribute("friendList", friendList);
+		model.addAttribute("likeCss", likeCss);
+		model.addAttribute("likeCnt", likeCount);
+		
+		return "fullUserStory";
+	}
+	
 
 	
 

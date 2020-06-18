@@ -41,4 +41,7 @@ public interface userStoryDAO {
 	
 	// 게시물삭제 시 좋아요 child삭제
 	public int like_child(userStoryVO storyVo)throws Exception;
+	
+	// follow한 유저  story
+	public List<userStoryVO> fullUserStory(String userEmail)throws Exception;
 }

@@ -74,5 +74,10 @@ public class userStoryServiceImpl implements userStoryService {
 	public int like_child(userStoryVO storyVo) throws Exception {
 		return storyDao.like_child(storyVo);
 	}
+
+	@Override
+	public List<userStoryVO> fullUserStory(String userEmail) throws Exception {
+		return storyDao.fullUserStory(userEmail);
+	}
 	
 }

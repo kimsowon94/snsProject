@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <title>또웡 SNS</title>
@@ -20,6 +21,8 @@
 
 <!-- 카메라 아이콘, 엑스 아이콘 쓰기 위해.. -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
 
 <style>
 html, body, h1, h2, h3, h4, h5 {
@@ -124,6 +127,62 @@ html, body, h1, h2, h3, h4, h5 {
 #myTable tr.header, #myTable tr:hover {
   background-color: #f1f1f1;
 }
+
+
+
+
+
+
+
+.toggled1{
+     color: red;
+}
+.toggled2{
+     color: white;
+}
+</style>
+
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal1 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content1 {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close1 {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close1:hover,
+.close1:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>
 
 
@@ -134,16 +193,20 @@ html, body, h1, h2, h3, h4, h5 {
 	<input type="hidden" id="fileCheck" name="fileCheck" value="N">
 	<input type="hidden" id="storyfileCheck" name="storyfileCheck" value="N">
 	
+
+	
+	
+	
 	<!-- Navbar -->
 	<div class="w3-top">
 		<div class="w3-bar w3-theme-d2 w3-left-align w3-large">
 			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"	href="javascript:void(0);" onclick="openNav()">
 				<i class="fa fa-bars"></i>
 			</a> 
-			<a href="#"	class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+			<a href="#"	class="w3-bar-item w3-button w3-padding-large w3-theme-d4" onclick="javascript:location.href='mainSnsHome.do'">
 				<i class="fa fa-home w3-margin-right"></i>Logo
 			</a> 
-			<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"	title="News">
+			<a href="javascript:location.href='/fullUserStory.do'" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"	title="News">
 				<i class="fa fa-globe"></i>
 			</a> 
 			<a href="#"	class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"	title="Account Settings"> 
@@ -331,17 +394,37 @@ html, body, h1, h2, h3, h4, h5 {
 				<div class="w3-row-padding">
 					<div class="w3-col m12">
 						<div class="w3-card w3-round w3-white">
-						<div class="w3-container w3-padding">
+							<div class="w3-container w3-padding">
+								<h6 class="w3-opacity story">오늘 하루를 남겨볼까요~?</h6>
+								<p contenteditable="true" class="w3-border w3-padding storyContent" id="storyContent"></p>
 								
+								<div id="storyImg">
+								
+								</div>
+								
+								<div class="filebox" style="align-items: center;">
+									<label for="storyPhotoReal" >
+									<i class="material-icons" id="storyLabel" >add_a_photo</i></label>
+									<input type="file" id="storyPhotoReal" name="storyPhotoReal" style="display: inline-block;" onclick="fnStoryImg()">
+								</div>
+								
+								<button type="button" class="w3-button w3-theme" onclick="fnPost()">
+									<i class="fa fa-pencil"></i>  Post
+								</button>					
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<c:forEach items="${storyList }" var="a"> 
+				<c:forEach items="${fullList }" var="a"> 
 				<div class="w3-container w3-card w3-white w3-round w3-margin">
-					<br> 
+					<br>
+					<c:if test="${a.userPhoto == null or a.userPhoto == ''}"> 
+					<img src="./resources/img/default.jpg"  alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 60px">
+					</c:if>
+					<c:if test="${a.userPhoto != null}"> 
 					<img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 60px">
+					</c:if>
 					<span class="w3-right w3-opacity">${a.storyDate}</span>
 					<h4>${a.userName }</h4>
 					<br>
@@ -353,22 +436,60 @@ html, body, h1, h2, h3, h4, h5 {
 							<img src="../resources/storyImg/${a.storyPhoto }" style="width: 100%" class="w3-margin-bottom">
 							</c:if>
 						</div>
-						<!-- <div class="w3-half">
-							<img src="/w3images/nature.jpg" style="width: 100%" class="w3-margin-bottom">
-						</div> -->
 					</div>
+					<br>
+						<div>
+							<span style="font-weight: bold; cursor: pointer;" id="likeCnt${a.storyNum}" onclick="like_btn(${a.storyNum})">
+
+								<c:forEach var="w" items="${likeCnt }">
+									<c:if test="${w.storyNum == a.storyNum}">
+								좋아요 ${w.likeCount } 개
+								</c:if>
+								</c:forEach>
+
+							</span>
+						</div>
+					<br>
+							<button type="button" onclick="fnLikeBtn(${a.storyNum})" class="w3-button w3-theme-d1 w3-margin-bottom">
+								
+								<i class="fa fa-thumbs-up" id="storyI${a.storyNum }" class="storyLikeI" 
+								
+									<c:forEach items="${likeCss }" var="t">
+										<c:if test="${t.storyNum == a.storyNum}">
+											style="color:red;"
+										</c:if>
+									</c:forEach>
+									>
+								</i>  좋아요 
+							
+								
+								
+							</button>
+
+					
+					<input type="hidden" id="story${a.storyNum }" name="story${a.storyNum }" class="storyValNum" 
+						<c:forEach items="${likeCss }" var="t">
+							<c:if test="${t.storyNum == a.storyNum}">
+								value="1"
+							</c:if>
+						
+						</c:forEach> 
+							>
+					
+					
 					<button type="button"
-						class="w3-button w3-theme-d1 w3-margin-bottom">
-						<i class="fa fa-thumbs-up"></i>  좋아요
-					</button>
-					<button type="button"
-						class="w3-button w3-theme-d2 w3-margin-bottom">
+						class="w3-button w3-theme-d2 w3-margin-bottom" onclick="comClick(${a.storyNum })">
 						<i class="fa fa-comment"></i> 댓글
 					</button>
 					<!-- 게시글 삭제하기 -->
+					<c:if test="${sessionScope.userEmail == a.userEmail}">
 					<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="if(confirm('해당 게시글을 삭제하시겠습니까?')){fnDelStory(${a.storyNum});}">
 						<i class="fa fa-trash-o"></i>  삭제
 					</button>
+					</c:if>
+					<p contenteditable="true" class="w3-border w3-padding" id="comment${a.storyNum }" style="display: none;"></p>
+					<button type="button"class="w3-button w3-theme-d2 w3-margin-bottom" style="display: none; margin: 0;float: left; margin-right: 5px;" id="register${a.storyNum }">등록</button>
+					<button type="button"class="w3-button w3-theme-d2 w3-margin-bottom" style="display: none; background-color: red;" id="revocation${a.storyNum }">취소</button>
 				</div>
 				</c:forEach>
 			</div>
@@ -418,9 +539,11 @@ html, body, h1, h2, h3, h4, h5 {
 				</div>
 				<br>
 
-				<div class="w3-card w3-round w3-white w3-padding-32 w3-center">
+				<div class="w3-card w3-round w3-white w3-padding-32 w3-center" id="weatherDiv">
 					<p>
-						<i class="fa fa-bug w3-xxlarge"></i>
+						<!-- <i class="fa fa-bug w3-xxlarge"></i> -->
+						<img id="weatherImg" style="width: 60%; color">
+						
 					</p>
 				</div>
 
@@ -460,9 +583,8 @@ html, body, h1, h2, h3, h4, h5 {
 					<th style="width: 60%;">이름</th>
 					<th style="width: 60%;"></th>
 				</tr>
-				
 				<c:forEach var="a" items="${friendList }">
-				<tr onclick="fnFri_prof(${a.userNum})" style="cursor: pointer;">
+				<tr onclick="javascipt:location.href='follow_user.do?userNum=${a.userNum}'" style="cursor: pointer;">
 					<c:if test="${a.userPhoto != null }">
 					<td><img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px">${a.userName }</td>
 					</c:if>
@@ -482,6 +604,34 @@ html, body, h1, h2, h3, h4, h5 {
 		</div>
 	</div>
 
+
+	<!-- The Modal -->
+	<div id="myModal1" class="modal1">
+
+		<!-- Modal content -->
+		<div class="modal-content1" style="width: 37%;">
+			<span class="close1">&times;</span>
+			<div id="result_div">
+			<!-- <table id="myTable likeFriend">
+				<tr class="header">
+					<th style="width: 60%;">좋아요 한 친구</th>
+					<th style="width: 60%;"></th>
+				</tr>
+				
+				<tr style="cursor: pointer;" >
+					<td></td>
+					<td></td>
+				</tr>
+			
+			</table> -->
+			</div>
+		</div>
+
+	</div>
+
+
+
+
 	<!--  모달 -->
 <script type="text/javascript">
 //Get the modal
@@ -490,8 +640,10 @@ var modal = document.getElementById("myModal");
 //Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 
+
 //Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
+
 
 //When the user clicks the button, open the modal 
 btn.onclick = function() {
@@ -509,6 +661,7 @@ if (event.target == modal) {
  modal.style.display = "none";
 }
 }
+
 </script>
 
 
@@ -528,10 +681,11 @@ function myFunction() {
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
-      }
     }       
   }
+  }
 }
+
 </script>
 
 

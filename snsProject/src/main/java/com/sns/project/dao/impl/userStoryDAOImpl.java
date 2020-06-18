@@ -75,4 +75,9 @@ public class userStoryDAOImpl implements userStoryDAO{
 		return sqlsession.delete("userStoryDAO.like_child", storyVo);
 	}
 
+	@Override
+	public List<userStoryVO> fullUserStory(String userEmail) throws Exception {
+		return sqlsession.selectList("userStoryDAO.fullUserStory", userEmail);
+	}
+
 }

@@ -104,4 +104,20 @@
 		FROM SNS_USERINFO
 		WHERE USER_NUM = #{userNum}
 	</select>
+	
+	<select id="friendList_follow" resultMap="userInfoVO">
+		SELECT B.FRIEND_RE,B.FRIEND_SE,(SELECT USER_NAME
+                    FROM SNS_USERINFO
+                     WHERE USER_EMAIL = B.FRIEND_SE) AS "USER_NAME"
+                  ,(SELECT USER_PHOTO
+                    FROM SNS_USERINFO
+                    WHERE USER_EMAIL = B.FRIEND_SE) AS "USER_PHOTO"
+                  ,(SELECT USER_NUM
+                    FROM SNS_USERINFO
+                    WHERE USER_EMAIL = B.FRIEND_SE) AS "USER_NUM"
+		FROM SNS_USERINFO A, SNS_FRIEND B
+		WHERE A.USER_EMAIL = B.FRIEND_RE AND B.FRIEND_RE = (SELECT USER_EMAIL
+                                                    		FROM SNS_USERINFO
+                                                    		WHERE USER_NUM = #{userNum})
+	</select>
 </mapper>

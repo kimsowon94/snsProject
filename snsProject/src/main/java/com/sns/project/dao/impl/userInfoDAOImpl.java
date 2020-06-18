@@ -68,5 +68,10 @@ public class userInfoDAOImpl implements userInfoDAO{
 		return sqlsession.selectList("userInfoDAO.follow_user", userNum);
 	}
 
+	@Override
+	public List<userInfoVO> friendList_follow(String userNum) throws Exception {
+		return sqlsession.selectList("userInfoDAO.friendList_follow",userNum);
+	}
+
 
 }

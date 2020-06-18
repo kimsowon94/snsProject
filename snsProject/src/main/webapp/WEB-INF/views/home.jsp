@@ -206,7 +206,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 			<a href="#"	class="w3-bar-item w3-button w3-padding-large w3-theme-d4" onclick="javascript:location.href='mainSnsHome.do'">
 				<i class="fa fa-home w3-margin-right"></i>Logo
 			</a> 
-			<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"	title="News">
+			<a href="javascript:location.href='/fullUserStory.do'" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"	title="News">
 				<i class="fa fa-globe"></i>
 			</a> 
 			<a href="#"	class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"	title="Account Settings"> 
@@ -303,9 +303,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 							<i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> 
 							친구 목록
 						</button>
-						<div id="Demo1" class="w3-hide w3-container">
-							<p>Some text..</p>
-						</div>
+						
 						<button onclick="myFunction('Demo2')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
 							<i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My
@@ -418,8 +416,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 				<c:forEach items="${storyList }" var="a"> 
 				<div class="w3-container w3-card w3-white w3-round w3-margin">
-					<br> 
+					<br>
+					<c:if test="${a.userPhoto == null or a.userPhoto == ''}"> 
+					<img src="./resources/img/default.jpg"  alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 60px">
+					</c:if>
+					<c:if test="${a.userPhoto != null}"> 
 					<img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 60px">
+					</c:if>
 					<span class="w3-right w3-opacity">${a.storyDate}</span>
 					<h4>${a.userName }</h4>
 					<br>
@@ -577,9 +580,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 					<th style="width: 60%;"></th>
 				</tr>
 				<c:forEach var="a" items="${friendList }">
-				<tr onclick="javascipt:location.href='follow_user.do?userNum=${a.userNum}'" style="cursor: pointer;">
+				<tr style="cursor: pointer;">
 					<c:if test="${a.userPhoto != null }">
-					<td><img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px">${a.userName }</td>
+					<td onclick="javascipt:location.href='follow_user.do?userNum=${a.userNum}'"><img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px">${a.userName }</td>
 					</c:if>
 					
 					<c:if test="${a.userPhoto == null }">
