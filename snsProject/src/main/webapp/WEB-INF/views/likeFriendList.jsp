@@ -9,7 +9,12 @@
 		</tr>
 		<c:forEach items="${likeFriend }" var="a">
 			<tr style="cursor: pointer;">
+				<c:if test="${a.userPhoto != null }">
 				<td><img src="../resources/upload/${a.userPhoto }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px">${a.userName }</td>
+				</c:if>
+				<c:if test="${a.userPhoto == null }">
+				<td><img src="../resources/img/default.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 30px">${a.userName }</td>
+				</c:if>
 				<td>${a.userEmail }</td>
 			</tr>
 		</c:forEach>
