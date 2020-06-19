@@ -25,6 +25,13 @@
 		<result property="friendDate" column="FRIEND_DATE"/>
 		<result property="friendRe" column="FRIEND_RE"/>
 		<result property="friendSe" column="FRIEND_SE"/>
+		<result property="comNum" column="COM_NUM"/>
+		<result property="comContent" column="COM_CONTENT"/>
+		<result property="comInsert" column="COM_INSERT"/>
+		<result property="comUpdate" column="COM_UPDATE"/>
+		<result property="comParent" column="COM_PARENT"/>
+		
+		
 	</resultMap>
 	
 	<insert id="userStoryInsert">
@@ -154,5 +161,22 @@
 				                         WHERE FRIEND_RE = #{userEmail})
 		   )
 		ORDER BY STORY_NUM DESC
+	</select>
+	
+	<insert id="commentPost">
+		<selectKey keyProperty="comNum" resultType="String" order="BEFORE">
+			SELECT NVL(MAX(COM_NUM),0)+1 AS "COM_NUM" FROM SNS_COMMENT
+		</selectKey>
+		INSERT INTO SNS_COMMENT(COM_NUM,STORY_NUM,COM_CONTENT,COM_INSERT,COM_UPDATE,USER_EMAIL,COM_PARENT)
+		VALUES(#{comNum},#{storyNum},#{comContent},SYSDATE,NULL,#{userEmail},null)
+	</insert>
+	
+	<select id="commentList" resultMap="userStoryVO">
+		SELECT A.STORY_NUM "STORY_NUM",B.USER_PHOTO "USER_PHOTO"
+			  , B.USER_NAME "USER_NAME", A.COM_CONTENT "COM_CONTENT", A.COM_INSERT "COM_INSERT"
+		FROM SNS_COMMENT A,SNS_USERINFO B, SNS_STORY C
+		WHERE A.STORY_NUM = C.STORY_NUM    
+      			AND A.USER_EMAIL = B.USER_EMAIL
+		ORDER BY COM_NUM
 	</select>
 </mapper>

@@ -80,4 +80,14 @@ public class userStoryDAOImpl implements userStoryDAO{
 		return sqlsession.selectList("userStoryDAO.fullUserStory", userEmail);
 	}
 
+	@Override
+	public int commentPost(userStoryVO storyVo) throws Exception {
+		return sqlsession.insert("userStoryDAO.commentPost", storyVo);
+	}
+
+	@Override
+	public List<userStoryVO> commentList() throws Exception {
+		return sqlsession.selectList("userStoryDAO.commentList");
+	}
+
 }

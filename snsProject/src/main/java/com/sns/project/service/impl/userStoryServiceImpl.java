@@ -79,5 +79,15 @@ public class userStoryServiceImpl implements userStoryService {
 	public List<userStoryVO> fullUserStory(String userEmail) throws Exception {
 		return storyDao.fullUserStory(userEmail);
 	}
+
+	@Override
+	public int commentPost(userStoryVO storyVo) throws Exception {
+		return storyDao.commentPost(storyVo);
+	}
+
+	@Override
+	public List<userStoryVO> commentList() throws Exception {
+		return storyDao.commentList();
+	}
 	
 }

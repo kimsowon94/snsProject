@@ -44,4 +44,10 @@ public interface userStoryDAO {
 	
 	// follow한 유저  story
 	public List<userStoryVO> fullUserStory(String userEmail)throws Exception;
+	
+	// 1차 댓글  insert
+	public int commentPost(userStoryVO storyVo)throws Exception;
+	
+	// 입력한 댓글 LIST
+	public List<userStoryVO> commentList()throws Exception;
 }

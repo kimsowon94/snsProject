@@ -722,14 +722,57 @@ function comClick(num) {
 	var storyNum = num;
 	$("#comment"+storyNum).css("display","block");	
 	$("#register" +storyNum).css("display","block");
-    $("#revocation"+storyNum).css("display","block");	
+    $("#revocation"+storyNum).css("display","block");
+    $("#commentResult"+storyNum).css("display","block");
     
     $(document).ready(function() {
     	$("#revocation"+storyNum).click(function() {
 			$("#comment"+storyNum).css("display","none");	
 			$("#register" +storyNum).css("display","none");
 			$("#revocation"+storyNum).css("display","none");
+			$("#commentResult"+storyNum).css("display","none");
 		})
 	})
 }
 
+
+// 댓글 등록버튼 누를 시 
+function register(num) {
+	var storyNum = num;
+	
+	var comment = $("#comment" + storyNum).html();
+	var userEmail = $("#userEmail").val();
+	
+	if(comment == null || comment == ''){
+		alert("댓글을 입력해주세요.");
+	}
+	else{
+		
+		$.ajax({
+			url : "/commentPost.do",
+			dataType : "JSON",
+			type : "POST",
+			data : { 
+				"storyNum" : storyNum,
+				"comContent" : comment,
+				"userEmail" : userEmail,
+			},
+			success : function(data, textStatus, jqXHR) 
+			{
+				location.reload();
+				$("#comment"+data.result).css("display","block");	
+				$("#register" +data.result).css("display","block");
+			    $("#revocation"+data.result).css("display","block");
+			    $("#commentResult"+data.result).css("display","block");
+
+			},
+			error : function() 
+			{
+				alert("오류");
+			}			
+		})
+
+	}
+	
+		
+}

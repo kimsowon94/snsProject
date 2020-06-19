@@ -204,7 +204,47 @@ public class userStoryVO {
 		this.friendDate = friendDate;
 	}
 	
-	
+	// 댓글 vo
+	private String comNum;
+	private String comContent;
+	private String comInsert;
+	private String comUpdate;
+	private String comParent;
+
+
+
+
+
+	public String getComNum() {
+		return comNum;
+	}
+	public void setComNum(String comNum) {
+		this.comNum = comNum;
+	}
+	public String getComContent() {
+		return comContent;
+	}
+	public void setComContent(String comContent) {
+		this.comContent = comContent;
+	}
+	public String getComInsert() {
+		return comInsert;
+	}
+	public void setComInsert(String comInsert) {
+		this.comInsert = comInsert;
+	}
+	public String getComUpdate() {
+		return comUpdate;
+	}
+	public void setComUpdate(String comUpdate) {
+		this.comUpdate = comUpdate;
+	}
+	public String getComParent() {
+		return comParent;
+	}
+	public void setComParent(String comParent) {
+		this.comParent = comParent;
+	}
 	
 	
 	

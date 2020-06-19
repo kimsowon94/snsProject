@@ -91,6 +91,7 @@ public class userInfoController {
 		List<userInfoVO> friendList = service.friendList(userEmail);
 		List<userStoryVO> likeCss = storyService.like_css(userEmail);
 		List<userStoryVO> likeCount = storyService.like_count();
+		List<userStoryVO> commentList = storyService.commentList();
 		
 		
 		
@@ -99,6 +100,7 @@ public class userInfoController {
 		model.addAttribute("friendList", friendList);
 		model.addAttribute("likeCss", likeCss);
 		model.addAttribute("likeCnt", likeCount);
+		model.addAttribute("commentList", commentList);
 		
 		return "home";	
 	}
@@ -442,6 +444,26 @@ public class userInfoController {
 		return "fullUserStory";
 	}
 	
+	// 1차 댓글 구현
+	@RequestMapping(value="/commentPost.do", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, String> commentPost(userStoryVO storyVo) throws Exception
+	{
+		HashMap<String, String> result = new HashMap<String, String>();
+		int count = storyService.commentPost(storyVo);
+		String num = storyVo.getStoryNum();
+		if(count == 1)
+		{
+			System.out.println("댓글 insert완료");
+			result.put("result",num);
+		}
+		else
+		{
+			System.out.println("댓글 insert실패");
+			result.put("result", "0");
+		}
+		return result;
+	}
 
 	
 
