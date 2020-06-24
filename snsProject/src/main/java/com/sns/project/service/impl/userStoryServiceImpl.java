@@ -89,5 +89,10 @@ public class userStoryServiceImpl implements userStoryService {
 	public List<userStoryVO> commentList() throws Exception {
 		return storyDao.commentList();
 	}
+
+	@Override
+	public int like_child2(userStoryVO storyVo) throws Exception {
+		return storyDao.like_child2(storyVo);
+	}
 	
 }

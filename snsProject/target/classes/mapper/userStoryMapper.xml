@@ -132,7 +132,13 @@
 	<delete id="like_child">
 		DELETE SNS_LIKE
 		WHERE USER_EMAIL = #{userEmail}
-     	AND STORY_NUM = #{storyNum}
+     		AND STORY_NUM = #{storyNum}
+	</delete>
+	
+	<delete id="like_child2">
+		DELETE SNS_COMMENT
+		WHERE USER_EMAIL = #{userEmail}
+    		AND STORY_NUM = #{storyNum}
 	</delete>
 	
 	<select id="fullUserStory" resultMap="userStoryVO">

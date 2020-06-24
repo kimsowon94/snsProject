@@ -90,4 +90,9 @@ public class userStoryDAOImpl implements userStoryDAO{
 		return sqlsession.selectList("userStoryDAO.commentList");
 	}
 
+	@Override
+	public int like_child2(userStoryVO storyVo) throws Exception {
+		return sqlsession.delete("userStoryDAO.like_child2", storyVo);
+	}
+
 }

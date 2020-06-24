@@ -180,6 +180,8 @@ public class userInfoController {
 	{
 		HashMap<String, String> result = new HashMap<String, String>();
 		storyService.like_child(storyVo);
+		storyService.like_child2(storyVo);
+		
 		int num = storyService.delUserStory(storyVo);
 		if(num == 1)
 		{

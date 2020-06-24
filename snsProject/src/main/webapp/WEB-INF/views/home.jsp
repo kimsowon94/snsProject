@@ -511,9 +511,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
 										</th>
 									</c:if>
 									<th style="padding-right: 10px; width: 10%; text-align: left;" >${c.userName } </th>
-									<td style="word-break:break-all;"> ${c.comContent }</td>
+									<td style="word-break:break-all;"> ${c.comContent }
+										<button type="button"class="w3-button" id="commentDel">삭제</button>
+										<button type="button"class="w3-button" id="commentUp">수정</button>
+									</td>
+									
 								</tr>
-								
+									
 									</c:if>
 								</c:forEach>
 						</table>
