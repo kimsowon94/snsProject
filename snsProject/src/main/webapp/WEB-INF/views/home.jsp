@@ -512,8 +512,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
 									</c:if>
 									<th style="padding-right: 10px; width: 10%; text-align: left;" >${c.userName } </th>
 									<td style="word-break:break-all;"> ${c.comContent }
-										<button type="button"class="w3-button" id="commentDel">삭제</button>
-										<button type="button"class="w3-button" id="commentUp">수정</button>
+										<c:if test="${sessionScope.userEmail ==  c.userEmail }">
+											<button type="button" id="commentDel" style="font-size:8px;" onclick="commentDel(${c.comNum})">삭제</button>
+											<button type="button" id="commentUp" style="font-size:8px;">수정</button>
+										</c:if>
 									</td>
 									
 								</tr>

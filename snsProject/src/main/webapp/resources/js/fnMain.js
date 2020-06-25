@@ -771,8 +771,13 @@ function register(num) {
 				alert("오류");
 			}			
 		})
-
 	}
+}
+
+
+function commentDel(num) {
+	alert("하이");
+	var comNum = num;
+	alert(comNum);
 	
-		
 }

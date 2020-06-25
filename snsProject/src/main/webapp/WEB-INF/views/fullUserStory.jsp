@@ -183,6 +183,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
   text-decoration: none;
   cursor: pointer;
 }
+
+.commentResult {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
 </style>
 
 
@@ -487,8 +495,39 @@ body {font-family: Arial, Helvetica, sans-serif;}
 						<i class="fa fa-trash-o"></i>  삭제
 					</button>
 					</c:if>
+					<div id="commentResult${a.storyNum }" class="commentResult" style="display: none;">
+						<table>
+							<c:forEach items="${commentList }" var="c">
+									<c:if test="${c.storyNum == a.storyNum}">
+								<tr>
+									<c:if test="${c.userPhoto != null }">
+										<th style="width: 7%;">
+											<img src="../resources/upload/${c.userPhoto }" alt="Avatar" class="w3-left w3-circle" style="width: 30px">
+										</th>
+	
+									</c:if>
+									<c:if test="${c.userPhoto == null }">
+										<th style="width: 7%;">
+											<img src="../resources/img/default.jpg" alt="Avatar" class="w3-left w3-circle" style="width: 30px">
+										</th>
+									</c:if>
+									<th style="padding-right: 10px; width: 10%; text-align: left;" >${c.userName } </th>
+									<td style="word-break:break-all;"> ${c.comContent }
+										<c:if test="${sessionScope.userEmail ==  c.userEmail }">
+											<button type="button" id="commentDel" style="font-size:8px;">삭제</button>
+											<button type="button" id="commentUp" style="font-size:8px;">수정</button>
+										</c:if>
+									</td>
+									
+								</tr>
+									
+									</c:if>
+								</c:forEach>
+						</table>
+	
+					</div>
 					<p contenteditable="true" class="w3-border w3-padding" id="comment${a.storyNum }" style="display: none;"></p>
-					<button type="button"class="w3-button w3-theme-d2 w3-margin-bottom" style="display: none; margin: 0;float: left; margin-right: 5px;" id="register${a.storyNum }">등록</button>
+					<button type="button"class="w3-button w3-theme-d2 w3-margin-bottom" style="display: none; margin: 0;float: left; margin-right: 5px;" id="register${a.storyNum }"  onclick="register(${a.storyNum })">등록</button>
 					<button type="button"class="w3-button w3-theme-d2 w3-margin-bottom" style="display: none; background-color: red;" id="revocation${a.storyNum }">취소</button>
 				</div>
 				</c:forEach>

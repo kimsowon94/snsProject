@@ -347,6 +347,7 @@ public class userInfoController {
 		List<userStoryVO> likeCss = storyService.like_css((String) session.getAttribute("userEmail"));
 		List<userStoryVO> likeCount = storyService.like_count();
 		List<userInfoVO> friendList = service.friendList_follow(userNum);
+		List<userStoryVO> commentList = storyService.commentList();
 		
 		model.addAttribute("list",list);
 		model.addAttribute("storyList", storyList);
@@ -354,6 +355,7 @@ public class userInfoController {
 		model.addAttribute("likeCss", likeCss);
 		model.addAttribute("likeCnt", likeCount);
 		model.addAttribute("friendList", friendList);
+		model.addAttribute("commentList", commentList);
 		
 		return "followHome";
 	}
@@ -436,12 +438,14 @@ public class userInfoController {
 		List<userInfoVO> friendList = service.friendList(userEmail);
 		List<userStoryVO> likeCss = storyService.like_css(userEmail);
 		List<userStoryVO> likeCount = storyService.like_count();
+		List<userStoryVO> commentList = storyService.commentList();
 		
 		model.addAttribute("list", list);
 		model.addAttribute("fullList", fullList);
 		model.addAttribute("friendList", friendList);
 		model.addAttribute("likeCss", likeCss);
 		model.addAttribute("likeCnt", likeCount);
+		model.addAttribute("commentList", commentList);
 		
 		return "fullUserStory";
 	}
