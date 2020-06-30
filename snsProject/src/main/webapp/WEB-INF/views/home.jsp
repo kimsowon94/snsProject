@@ -491,7 +491,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 					</button>
 					<!-- 게시글 삭제하기 -->
 					<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="if(confirm('해당 게시글을 삭제하시겠습니까?')){fnDelStory(${a.storyNum});}">
-						<i class="fa fa-trash-o"></i>  삭제
+						<i class="fa fa-trash-o"></i> 삭제
 					</button>
 					
 					<div id="commentResult${a.storyNum }" class="commentResult" style="display: none;">
