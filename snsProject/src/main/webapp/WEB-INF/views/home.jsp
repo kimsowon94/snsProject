@@ -516,6 +516,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 											<button type="button" id="commentDel" style="font-size:8px;" onclick="commentDel(${c.comNum})">삭제</button>
 											<button type="button" id="commentUp" style="font-size:8px;">수정</button>
 										</c:if>
+										
 									</td>
 									
 								</tr>
